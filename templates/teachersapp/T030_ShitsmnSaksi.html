@@ -1,0 +1,139 @@
+{% extends "teachersapp/T000_Base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row gx-3">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-8">
+            <div class="p-3 mb-2 bg-light text-dark">
+                <br>
+                <h2>質問作成</h2>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <label>タイトル：</label>
+                        <input type="text" class="form-control" placeholder="ぱーちんのだちがやられた件">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>ハッシュタグ：</label>
+                        <input type="text" class="form-control" placeholder="#ぱーちん #おさない #めびうす">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>質問内容：</label>
+                        <textarea class="form-control" rows="15" placeholder="ひよってるやついるぅぅぅぅ？"></textarea>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row  justify-content-start">
+                            <div class="col-md-4">
+                                <label for="kaigi1">会議時間 第一希望：</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="datetime-local" class="form-control" id="kaigi1">
+                            </div>
+                            <div class="col-md-1">
+                                <p>から</p>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control">
+                                    <!-- ここの時間はDBから取得してfor文で回すように変更予定 -->
+                                    <option>o</option>
+                                    <option>15</option>
+                                    <option>30</option>
+                                    <option>45</option>
+                                    <option>60</option>
+                                    <!-- ここまで -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row  justify-content-start">
+                            <div class="col-md-4">
+                                <label for="kaigi2">会議時間 第二希望：</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="datetime-local" class="form-control" id="kaigi2">
+                            </div>
+                            <div class="col-md-1">
+                                <p>から</p>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control">
+                                    <!-- ここの時間はDBから取得してfor文で回すように変更予定 -->
+                                    <option>o</option>
+                                    <option>15</option>
+                                    <option>30</option>
+                                    <option>45</option>
+                                    <option>60</option>
+                                    <!-- ここまで -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="row  justify-content-start">
+                            <div class="col-md-4">
+                                <label for="kaigi3">会議時間 第三希望：</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="datetime-local" class="form-control" id="kaigi3">
+                            </div>
+                            <div class="col-md-1">
+                                <p>から</p>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control">
+                                    <!-- ここの時間はDBから取得してfor文で回すように変更予定 -->
+                                    <option>o</option>
+                                    <option>15</option>
+                                    <option>30</option>
+                                    <option>45</option>
+                                    <option>60</option>
+                                    <!-- ここまで -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row justify-content-start">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-success btn-block">新規登録</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-muted btn-block">閉じる</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="p-3 mb-2 bg-light text-dark">
+                    <h6>★今日の一押し★</h6>
+                    <div class="video">
+                        <!-- <label>どこまでいってもにげてやる</label> -->
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/UKESIh9fEfA" title="YouTube video player"
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </body>
+            </div>
+        </div>
+    </div>
+
+    <br>
+</div>
+
+
+
+
+
+{% endblock content %}

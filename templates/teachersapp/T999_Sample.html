@@ -1,0 +1,55 @@
+{% extends "teachersapp/T000_Base.html" %}
+<!-- <html-->
+    <!-- <header> -->
+        {% block head %}
+            {% load static %}
+            <link rel="stylesheet" href="{% static '/css/teachersproject.css' %}">
+        {% endblock head %}
+    <!-- </header> -->
+    <!-- <body> -->
+        {% block header %}
+            <h1>サンプル画面</h1>
+        {% endblock header %}
+
+        {% block content %}
+            サンプル画面コンテンツ
+            {% if messages %}
+                <div class="messages">
+                    <br>メッセージ表示エリア-------------------------------------
+                        {% for message in messages %}
+                            <br>{{ message }}
+                        {% endfor %}
+                    <br>--------------------------------------------------------
+                </div>
+            {% endif %}
+            <br>----------------------------------------------------------------------------------------------
+            <br><div class="debug">S999検証</div>
+            {% if list_shitsmnIchirn %}
+                <div >
+                    {% for shitsmn in list_shitsmnIchirn %}
+                        <br>■{{ shitsmn.SHITSMN_TITLE}},{{ shitsmn.SHITSMN_NAIYO}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S050検証</div>
+            {% if list_shitsmnList_shinchk %}
+                <div >
+                    {% for shitsmn_shinchk in list_shitsmnList_shinchk %}
+                        <br>■{{ shitsmn_shinchk.SHITSMN_TITLE}},{{ shitsmn_shinchk.SHITSMN_NAIYO}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+            <br><div class="debug">S180検証</div>
+            {% if list_hanyoMst %}
+                <div >
+                    {% for hanyo in list_hanyoMst %}
+                        <br>■{{ hanyo.SECCD}},{{ hanyo.CD}},{{ hanyo.NAIYO01}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>---------------------------------------------------------------------------------------------
+        {% endblock content %}
+    <!-- </body>>-->
+<!-- </html>-->

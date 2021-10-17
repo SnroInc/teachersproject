@@ -1,0 +1,36 @@
+{% extends "teachersapp/T000_Base.html" %}
+<!-- <html-->
+
+<!-- <body> -->
+{% block content %}
+
+<br>
+
+<div class="container">
+    <form class="fm1" action="自分のサイトURL" method="get">
+        <input class="bx1" name="s" type="search" placeholder="フリーワードを入力" />
+        <button type="submit" class="btn1"><i class="fas fa-search"></i></button>
+    </form>
+</div>
+<div class="container">
+    <h6>解答募中質問一覧</h6>
+    {% if list_shitsmnList_shinchk %}
+    <div class="row">
+        {% for shitsmn_shinchk in list_shitsmnList_shinchk %}
+        <div class="col-sm-6" type="button" onclick="action_add_task();">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ shitsmn_shinchk.SHITSMN_TITLE }}</h5>
+                    <p class="card-text">{{ shitsmn_shinchk.SHITSMN_NAIYO }}</p>
+                </div>
+            </div>
+            <br>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+<br>
+<br>
+
+{% endblock content %}
