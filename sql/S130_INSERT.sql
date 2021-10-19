@@ -1,0 +1,6 @@
+#DB選択
+USE TEACHERSDB;
+
+select * from S130_KAIG_ID;
+
+INSERT INTO S130_KAIG_ID VALUES ('19920101',0,current_timestamp(6));

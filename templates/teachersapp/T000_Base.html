@@ -15,7 +15,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/teachersproject.css' %}">
     <!-- スクリプト定義 -->
-    <script>function action_add_task() {
+    <script>
+        function action_add_task() {
             location.href = "https://www.nishishi.com/css/boxdesign-for-text-input-form.html#boxdesign-for-text-input2";
         }
     </script>
@@ -28,6 +29,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
+    {% block head %}
+    {% endblock head %}
 
 </head>
 
@@ -44,11 +47,11 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Navbar brand -->
-                    <a class="navbar-brand" href="{% url 'teachersapp:index' %}">Teachers!</a>
+                    <a class="navbar-brand" href="{% url 'teachersapp:topPage' %}">Teachers!</a>
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'teachersapp:index' %}">Home
+                            <a class="nav-link" href="{% url 'teachersapp:topPage' %}">Home
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
@@ -124,7 +127,7 @@
             <br>
             <br>
             {% block content %}
-            {% endblock %}
+            {% endblock content %}
             <br>
             <br>
             <br>

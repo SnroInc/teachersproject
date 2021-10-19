@@ -45,20 +45,7 @@ def main(request):
             例は、render
             """
             #サービスを利用する場合は呼び出す
-            json_S999 = S999_SampleService.main()
-            #json型から各値を取得する
-            flg_S999 = json_S999["json_CommonInfo"]["errflg"]
-            list_msgInfo_S999 = json_S999["json_CommonInfo"]["list_msgInfo"]
-            list_shitsmnIchirn_S999 = json_S999["list_shitsmnIchirn"]
-            #メッセージがある場合はセットする
-            C030_MessageUtil.setMessageList(request,list_msgInfo_S999)
-            #--S180-------------------------------------------------------------------------
-            json_S180 = S180_HANYOMSTSHTK.main("SEC0001","01")
-            flg_S180 = json_S180["json_CommonInfo"]["errflg"]
-            list_msgInfo_S180 = json_S180["json_CommonInfo"]["list_msgInfo"]
-            list_M101_hanyoMst_S180 = json_S180["list_M101_hanyoMst"]
-            C030_MessageUtil.setMessageList(request,list_msgInfo_S180)
-            #-------------------------------------------------------------------------------
+            """
             #--S060-------------------------------------------------------------------------
             #サービス呼び出し
             json_S060 = S060_ShitsmnListShutk_Shinchk.main()
@@ -69,12 +56,12 @@ def main(request):
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S060)
             #-------------------------------------------------------------------------------
+            """
             #戻り値にセット
             flg_return = "0"
             template = 'teachersapp/T020_Login.html'
-            context = {**context,**{"list_shitsmnIchirn":list_shitsmnIchirn_S999,
-                                    "list_shitsmnList_shinchk":list_T100_shitsmnList_shinchk_S060,
-                                    "list_hanyoMst":list_M101_hanyoMst_S180,
+            context = {**context,**{
+                                    #"list_shitsmnList_shinchk":list_T100_shitsmnList_shinchk_S060,
                                     }
                     }
         

@@ -5,6 +5,7 @@ C010_Const
 
 """
 from django.contrib.messages import constants
+import MySQLdb
 
 
 #Djangoメッセージレベル
@@ -13,3 +14,8 @@ INFO = constants.INFO
 SUCCESS = constants.SUCCESS
 WARNING = constants.WARNING
 ERROR = constants.ERROR
+
+#シーケンステーブルID
+S010 = {"tableID":"S010_USER_ID","header":"U"}
+S100 = {"tableID":"S100_SHITSMN_ID","header":"Q"}
+S120 = {"tableID":"S130_KAIG_ID","header":"K"}

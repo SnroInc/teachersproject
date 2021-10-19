@@ -1,5 +1,14 @@
 {% extends "teachersapp/T000_Base.html" %}
 
+{% block head %}
+<script>
+    function shitsmnSaksei() {
+        document.getElementById('form').action = "{% url 'teachersapp:shitsmnsaksi' %}";
+        document.getElementById('form').submit();
+    }
+</script>
+{% endblock head %}
+
 {% block content %}
 
 <div class="container">
@@ -12,20 +21,20 @@
                 <br>
                 <h2>質問作成</h2>
                 <br>
-                <form>
+                <form id='form' name='form' method="post">{% csrf_token %}
                     <div class="form-group">
                         <label>タイトル：</label>
-                        <input type="text" class="form-control" placeholder="ぱーちんのだちがやられた件">
+                        <input type="text" id = "shitsmnTitle" name = "shitsmnTitle" class="form-control" placeholder="ぱーちんのだちがやられた件">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>ハッシュタグ：</label>
-                        <input type="text" class="form-control" placeholder="#ぱーちん #おさない #めびうす">
+                        <input type="text" id = "hashTags" name = "hashTags" class="form-control" placeholder="#ぱーちん #おさない #めびうす">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>質問内容：</label>
-                        <textarea class="form-control" rows="15" placeholder="ひよってるやついるぅぅぅぅ？"></textarea>
+                        <textarea class="form-control" id = "shitsmnNaiyo" name = "shitsmnNaiyo" rows="15" placeholder="ひよってるやついるぅぅぅぅ？"></textarea>
                     </div>
                     <br>
                     <div class="form-group">
@@ -105,7 +114,7 @@
                     <br>
                     <div class="row justify-content-start">
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-success btn-block">新規登録</button>
+                            <button type="button" onclick="shitsmnSaksei();" class="btn btn-success btn-block">新規登録</button>
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-muted btn-block">閉じる</button>

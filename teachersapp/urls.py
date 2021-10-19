@@ -8,7 +8,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 app_name = 'teachersapp'
 urlpatterns = [
     #Sample
-    path('', views.v010_TopPage, name='index'),
+    path('', views.v010_TopPage, name='topPage'),
     path('login/', views.v020_LoginView, name='login'),
     path('shitsmnsaksi/', views.v030_ShitsmnSaksiView, name='shitsmnsaksi'),
     path('Sample/', views.v999_sampleMethod, name='sample_path1'),
