@@ -19,6 +19,9 @@
         function action_add_task() {
             location.href = "https://www.nishishi.com/css/boxdesign-for-text-input-form.html#boxdesign-for-text-input2";
         }
+        function action_openTaskManagement(){
+            window.open('https://tnroot01.pythonanywhere.com/TaskManagement/', '_blank'); 
+        }
     </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -64,6 +67,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'teachersapp:login' %}">ログイン</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="action_openTaskManagement();">課題管理</a>
                         </li>
                     </ul>
                 </div>
