@@ -136,3 +136,5 @@ def v999_systemError(request):
         #コンソールにエラーを出力
         C030_MessageUtil.systemErrorCommonMethod()
         return render(request, template, context)
+
+#イノシュネルマイスター
