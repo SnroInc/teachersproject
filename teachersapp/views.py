@@ -138,3 +138,4 @@ def v999_systemError(request):
         return render(request, template, context)
 
 #イノシュネルマイスター
+# inoue
