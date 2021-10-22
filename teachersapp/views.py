@@ -137,4 +137,5 @@ def v999_systemError(request):
         C030_MessageUtil.systemErrorCommonMethod()
         return render(request, template, context)
 
+#イノシュネルマイスター
 # inoue
