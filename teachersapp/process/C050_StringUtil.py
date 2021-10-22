@@ -5,8 +5,8 @@ C050_StringUtil
 
 """
 
-def isNullorSpace(str):
+def isNullCharacter(_str_):
     result = False
-    if str == None or str == "":
+    if _str_ == None or _str_ == "":
         result = True
     return result

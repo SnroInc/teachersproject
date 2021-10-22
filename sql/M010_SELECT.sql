@@ -1,0 +1,4 @@
+#DB選択
+USE TEACHERSDB;
+
+select HEADER,SAIBNVALUE, UPDDATE from m010_saibnmst where TABLEID = 'T100' ;

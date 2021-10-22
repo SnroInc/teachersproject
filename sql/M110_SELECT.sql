@@ -1,0 +1,3 @@
+USE TEACHERSDB;
+
+select KAIGJKN_CD,KAIGJKN_TIME,KAIGJKN_DISP from m110_kaigjkn order by HYOJIJN asc ;

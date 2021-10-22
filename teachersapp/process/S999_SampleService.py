@@ -37,16 +37,20 @@ def main():
         msgInfo2 = C030_MessageUtil.getMessageInfo(msgID2,tuple_msgPalams2)
         list_msgInfo.append(msgInfo1)
         list_msgInfo.append(msgInfo2)
-        
+
         #戻り値の共通項目を作成
         json_CommonInfo = {"errflg":errflg, "list_msgInfo" : list_msgInfo}
         #戻り値を作成
-        json_service = {"json_CommonInfo":json_CommonInfo, "list_shitsmnIchirn" : rows}
+        rows = [] #大量に出てくるため初期化
+        json_service = {"json_CommonInfo":json_CommonInfo, "tuple_shitsmnIchirn" : rows}
         return json_service
     #==例外処理==========================================================================================
-    except Exception as e :
-        #エラーフラグを「2：システムエラー」にする
-        errflg = "2"
-        #システムエラー共通処理
-        C030_MessageUtil.systemErrorCommonMethod()
+    except C020_DBUtil.MySQLDBException as e :
+        #エラーフラグを立てる
+        errflg = "1"
+        #DB接続終了（ロールバック）
+        C020_DBUtil.closeDB(json_DBConnectInfo,errflg)
         raise
+    except Exception as e :
+        raise
+    #====================================================================================================

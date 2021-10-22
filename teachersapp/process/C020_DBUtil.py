@@ -13,6 +13,8 @@ https://gametech.vatchlog.com/2019/05/07/mysqlclient-utf-8/
 # MySQLdbのインポート
 import MySQLdb
 
+#MSQLDBエラー
+MySQLDBException = MySQLdb.MySQLError
 
 def connectDB():
     # データベースへの接続とカーソルの生成

@@ -77,7 +77,7 @@ def getMessageInfo_DB(msgID):
     #DB接続開始、コネクションとカーソルを取得
     json_DBConnectInfo = C020_DBUtil.connectDB()
     #クエリを定義
-    sql = "SELECT MSGID,MSGLEVEL,MSGNAIYO FROM M020_MSGMST WHERE MSGID = %s ;"
+    sql = "SELECT MSGID,MSGLEVEL,MSGNAIYO FROM M020_MSGMST WHERE MSGID = %s and DELFLG = '0' ;"
     args = (msgID,) #tuple型
     #クエリを実行
     rows = C020_DBUtil.executeSQL(json_DBConnectInfo, sql, args)
