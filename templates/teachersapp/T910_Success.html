@@ -1,0 +1,35 @@
+{% extends "teachersapp/T000_Base.html" %}
+<!-- <html-->
+<!-- <header> -->
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/teachersproject.css' %}">
+{% endblock head %}
+<!-- </header> -->
+<!-- <body> -->
+{% block header %}
+<h1></h1>
+{% endblock header %}
+
+{% block content %}
+<!-- メッセージ表示エリア-------------------------------------------------- -->
+{% if messages %}
+<div class="container">
+    <div class="alert alert-info" role="alert">
+        <div class="row">
+            <div class="col-sm-12">
+                {% for message in messages %}
+                <p class="non_margen">{{ message }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<!-- メッセージ表示エリア-------------------------------------------------- -->
+<div class="container">
+    <a href="{% url 'teachersapp:topPage' %}"><h4>Topページへ</h4></a>
+</div>
+{% endblock content %}
+<!-- </body>>-->
+<!-- </html>-->

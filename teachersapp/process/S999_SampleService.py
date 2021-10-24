@@ -29,15 +29,17 @@ def main():
         C020_DBUtil.closeDB(json_DBConnectInfo,errflg)
         #--------------------------------------------------------------------------------------------
         #メッセージがある場合はメッセージリストに追加
+        #--------------------------------------------------
         msgID1 = "W0001"
         tuple_msgPalams1 = ()
         msgInfo1 = C030_MessageUtil.getMessageInfo(msgID1,tuple_msgPalams1)
+        list_msgInfo.append(msgInfo1)
+        #--------------------------------------------------
         msgID2 = "S0001"
         tuple_msgPalams2 = ("本能寺の変","信長を暗殺","下剋上")
         msgInfo2 = C030_MessageUtil.getMessageInfo(msgID2,tuple_msgPalams2)
-        list_msgInfo.append(msgInfo1)
         list_msgInfo.append(msgInfo2)
-
+        #--------------------------------------------------
         #戻り値の共通項目を作成
         json_CommonInfo = {"errflg":errflg, "list_msgInfo" : list_msgInfo}
         #戻り値を作成

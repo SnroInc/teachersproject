@@ -111,3 +111,12 @@
   background-color:rgb(225, 243, 225);
 }
 /** 競馬ニュースcss ---------------------------------------------------**/
+
+.non_margen {
+  margin-top: 0;
+  margin-bottom:0;
+}
+.one_margen {
+  margin-top: 1;
+  margin-bottom:1;
+}
