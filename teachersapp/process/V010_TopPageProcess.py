@@ -13,6 +13,7 @@ flg_return==1の時、「path_name」必須
 from django.urls import reverse
 from . import S999_SampleService
 from . import (C010_Const,C030_MessageUtil,
+                S006_GetKeibaNews,
                 S180_HANYOMSTSHTK,
                 S060_ShitsmnListShutk_Shinchk
 )
@@ -52,6 +53,8 @@ def main(request):
             flg_S060 = json_S060["json_CommonInfo"]["errflg"]
             list_msgInfo_S060 = json_S060["json_CommonInfo"]["list_msgInfo"]
             tuple_T100_shitsmnList_shinchk_S060 = json_S060["tuple_T100_shitsmnList_shinchk"]
+            #最新ニュース取得
+            list_newsInfo = S006_GetKeibaNews.main(0)
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S060)
             #-------------------------------------------------------------------------------
@@ -60,6 +63,7 @@ def main(request):
             template = 'teachersapp/T010_TopPage.html'
             context = {**context,**{
                                     "tuple_shitsmnList_shinchk":tuple_T100_shitsmnList_shinchk_S060,
+                                    "list_newsInfo":list_newsInfo,
                                     }
                     }
         

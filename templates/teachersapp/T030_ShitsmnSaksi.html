@@ -24,17 +24,20 @@
                 <form id='form' name='form' method="post">{% csrf_token %}
                     <div class="form-group">
                         <label>タイトル：</label>
-                        <input type="text" id = "shitsmnTitle" name = "shitsmnTitle" class="form-control" placeholder="ぱーちんのだちがやられた件">
+                        <input type="text" id="shitsmnTitle" name="shitsmnTitle" class="form-control"
+                            placeholder="ぱーちんのだちがやられた件">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>ハッシュタグ：</label>
-                        <input type="text" id = "hashTags" name = "hashTags" class="form-control" placeholder="#ぱーちん #おさない #めびうす">
+                        <input type="text" id="hashTags" name="hashTags" class="form-control"
+                            placeholder="#ぱーちん #おさない #めびうす">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>質問内容：</label>
-                        <textarea class="form-control" id = "shitsmnNaiyo" name = "shitsmnNaiyo" rows="15" placeholder="ひよってるやついるぅぅぅぅ？"></textarea>
+                        <textarea class="form-control" id="shitsmnNaiyo" name="shitsmnNaiyo" rows="15"
+                            placeholder="ひよってるやついるぅぅぅぅ？"></textarea>
                     </div>
                     <br>
                     <div class="form-group">
@@ -114,7 +117,8 @@
                     <br>
                     <div class="row justify-content-start">
                         <div class="col-md-6">
-                            <button type="button" onclick="shitsmnSaksei();" class="btn btn-success btn-block">新規登録</button>
+                            <button type="button" onclick="shitsmnSaksei();"
+                                class="btn btn-success btn-block">新規登録</button>
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-muted btn-block">閉じる</button>
@@ -124,17 +128,35 @@
             </div>
         </div>
         <div class="col-md-3">
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
             <div class="p-3 mb-2 bg-light text-dark">
-                    <h6>★今日の一押し★</h6>
-                    <div class="video">
-                        <!-- <label>どこまでいってもにげてやる</label> -->
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/UKESIh9fEfA" title="YouTube video player"
-                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </body>
+                <h6>★今日の一押し★</h6>
+                <div class="video">
+                    <!-- <label>どこまでいってもにげてやる</label> -->
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UKESIh9fEfA"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
             </div>
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <br>
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <div class="">
+                    <h5 class="tp_bg_newsAreaTitle">★新着ニュース</h5>
+                    {% for json_newsInfo in list_newsInfo %}
+
+                    <a class="text-decoration-none text-dark" href="{{json_newsInfo.newsURL}}" target="_blank">
+                        <div class="tp_bg_newsArea">
+                            <p>{{json_newsInfo.newsTitle}}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
         </div>
     </div>
 

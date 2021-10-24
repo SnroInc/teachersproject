@@ -88,8 +88,26 @@
   height: 100%;
 }
 
-.content {
-  background-image: url("/static/images/jra.png");
+.tp_content {
+  /* background-image: url("/static/images/jra.png"); */
   background-color:rgba(255,255,255,0.8);
   background-blend-mode:lighten;
 }
+
+/** 競馬ニュースcss ---------------------------------------------------**/
+.tp_bg_newsArea{
+  background-image: url("/static/images/jra.png");
+  color:rgb(5, 58, 5);
+  background-color:rgba(255,255,255,0.8);
+  background-blend-mode:lighten;
+}
+
+.tp_bg_newsAreaTitle{
+  color:rgb(255, 255, 255);
+  background-color:rgb(75, 117, 75);
+}
+
+.tp_bg_newsInfo{
+  background-color:rgb(225, 243, 225);
+}
+/** 競馬ニュースcss ---------------------------------------------------**/

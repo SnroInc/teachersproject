@@ -14,6 +14,7 @@ import datetime
 from django.urls import reverse
 from . import S999_SampleService
 from . import (C010_Const,C030_MessageUtil,
+                S006_GetKeibaNews,
                 S020_ShitsmnInfoTork
 )
 
@@ -86,8 +87,9 @@ def main(request):
             #戻り値にセット
             flg_return = "0"
             template = 'teachersapp/T030_ShitsmnSaksi.html'
+            list_newsInfo = S006_GetKeibaNews.main(10)
             context = {**context,**{
-                                    #"list_shitsmnList_shinchk":list_T100_shitsmnList_shinchk_S060,
+                                    "list_newsInfo":list_newsInfo,
                                     }
                     }
         
