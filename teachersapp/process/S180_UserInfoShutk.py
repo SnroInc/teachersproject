@@ -11,7 +11,7 @@ from . import C020_DBUtil,C030_MessageUtil
 
 SERVICE_ID = "S180"
 
-def main(loginID):
+def main(userID):
     #--戻り値用の変数宣言------------------------------------------------------------------------------
     errflg = "0"
     list_msgInfo = []
@@ -24,7 +24,7 @@ def main(loginID):
         #クエリを定義
         sql = "select USERID,USERNAME,MAIL_ADDRESS,LOGINID,LOGINPASS,HYOKA,USERCOMMENT,LOGINKBN from M050_USER where USERID = %s and DELFLG = %s ;"
         #パラメータを定義
-        args = (loginID,"0",)
+        args = (userID,"0",)
         #クエリを実行し、結果を取得
         rows = C020_DBUtil.executeSQL(json_DBConnectInfo,sql,args)
         #DB接続終了

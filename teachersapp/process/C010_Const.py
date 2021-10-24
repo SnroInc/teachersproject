@@ -19,3 +19,7 @@ ERROR = constants.ERROR
 S010 = {"tableID":"S010_USER_ID","header":"U"}
 S100 = {"tableID":"S100_SHITSMN_ID","header":"Q"}
 S120 = {"tableID":"S130_KAIG_ID","header":"K"}
+
+#共通画面パス
+PATH_NAME_ERR = 'teachersapp:systemError'
+PATH_NAME_SUCCESS = 'teachersapp:success'

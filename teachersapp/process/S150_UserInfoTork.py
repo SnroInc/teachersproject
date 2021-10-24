@@ -37,7 +37,12 @@ def main(userName,mailAddress,loginID,loginPass,hyoka,userComment,loginKbn):
         C020_DBUtil.closeDB(json_DBConnectInfo,errflg)
         #--------------------------------------------------------------------------------------------
         #メッセージがある場合はリストに追加
-
+        #--------------------------------------------------
+        msgID_01 = "S0002"
+        tuple_msgPalams_01 = ("登録",)
+        msgInfo_01 = C030_MessageUtil.getMessageInfo(msgID_01,tuple_msgPalams_01)
+        list_msgInfo.append(msgInfo_01)
+        #--------------------------------------------------
         #戻り値の共通項目を作成
         json_CommonInfo = {"errflg":errflg, "list_msgInfo" : list_msgInfo}
         #戻り値を作成
