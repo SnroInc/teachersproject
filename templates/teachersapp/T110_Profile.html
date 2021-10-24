@@ -50,7 +50,7 @@
                     <br>
                     <div class="form-group">
                         <label>メールアドレス</label>
-                        <input type="text" id="mailAddress" name="mailAddress" class="form-control"
+                        <input type="email" id="mailAddress" name="mailAddress" class="form-control"
                             value="{{userInfo.MAIL_ADDRESS}}">
                     </div>
                     <br>
@@ -90,11 +90,20 @@
             </div>
         </div>
         <div class="col-md-3">
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <h6>★今日の一押し★</h6>
+                <a href="{{json_keibaInfo.json_newsVideoKametanInfo.newsVideo_kametani_url}}" target="_blank">
+                    <img class="tp_thumbnailImg"
+                        src="{{json_keibaInfo.json_newsVideoKametanInfo.newsVideo_kametani_imgSrc}}">
+                </a>
+            </div>
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
             <!-- ニュースエリア ------------------------------------------------------------------------------->
             <div class="p-3 mb-2 bg-light text-dark">
                 <div class="">
                     <h5 class="tp_bg_newsAreaTitle">★新着ニュース</h5>
-                    {% for json_newsInfo in list_newsInfo %}
+                    {% for json_newsInfo in json_keibaInfo.list_news_Info_gokum %}
 
                     <a class="text-decoration-none text-dark" href="{{json_newsInfo.newsURL}}" target="_blank">
                         <div class="tp_bg_newsArea">

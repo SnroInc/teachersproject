@@ -12,6 +12,7 @@ from .process import (
     V120_UserKoshn
 )
 from .process import C010_Const,C030_MessageUtil
+from .process import S006_GetKeibaNews
 
 PATH_ERR = C010_Const.PATH_NAME_ERR
 
@@ -151,6 +152,29 @@ def v120_UserKoshn(request):
         return redirect(PATH_ERR)
 
 
+def v999_SystemError(request):
+    template = 'teachersapp/T900_ERR500.html'
+    context = {}
+    try:
+        return render(request, template, context)
+    except Exception as e :
+        #コンソールにエラーを出力
+        C030_MessageUtil.systemErrorCommonMethod()
+        return render(request, template, context)
+
+def v910_SuccessView(request):
+    template = 'teachersapp/T910_Success.html'
+    context = {}
+    try:
+        return render(request, template, context)
+    except Exception as e :
+        #システムエラー共通処理
+        C030_MessageUtil.systemErrorCommonMethod()
+        #システムエラー画面に遷移
+        return redirect(PATH_ERR)
+
+
+#===テストorサンプルメソッド========================================================================
 def v999_sampleMethod(request):
     try:
         #ビュープロセスクラスを呼び出し
@@ -195,27 +219,12 @@ def v999_sampleMethod2(request):
         C030_MessageUtil.systemErrorCommonMethod()
         raise(e)
 
-
-def v999_SystemError(request):
-    template = 'teachersapp/T900_ERR500.html'
-    context = {}
-    try:
-        return render(request, template, context)
-    except Exception as e :
-        #コンソールにエラーを出力
-        C030_MessageUtil.systemErrorCommonMethod()
-        return render(request, template, context)
-
-def v910_SuccessView(request):
-    template = 'teachersapp/T910_Success.html'
-    context = {}
-    try:
-        return render(request, template, context)
-    except Exception as e :
-        #システムエラー共通処理
-        C030_MessageUtil.systemErrorCommonMethod()
-        #システムエラー画面に遷移
-        return redirect(PATH_ERR)
-
-#イノシュネルマイスター
-# inoue
+    #テスト01
+def test01(request):
+    json_keibaInfo = S006_GetKeibaNews.main(0)
+    #メッセージリストを宣言
+    template = "teachersapp/T999_test01.html"
+    context = {"json_keibaInfo":json_keibaInfo}
+    #返却
+    return render(request, template, context) 
+#====================================================================================================

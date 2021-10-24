@@ -54,7 +54,7 @@ def main(request):
             list_msgInfo_S060 = json_S060["json_CommonInfo"]["list_msgInfo"]
             tuple_T100_shitsmnList_shinchk_S060 = json_S060["tuple_T100_shitsmnList_shinchk"]
             #最新ニュース取得
-            list_newsInfo = S006_GetKeibaNews.main(0)
+            json_keibaInfo = S006_GetKeibaNews.main(0)
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S060)
             #-------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ def main(request):
             template = 'teachersapp/T010_TopPage.html'
             context = {**context,**{
                                     "tuple_shitsmnList_shinchk":tuple_T100_shitsmnList_shinchk_S060,
-                                    "list_newsInfo":list_newsInfo,
+                                    "json_keibaInfo":json_keibaInfo,
                                     }
                     }
         

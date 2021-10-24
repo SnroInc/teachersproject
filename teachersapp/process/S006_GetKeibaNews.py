@@ -8,6 +8,7 @@
 #==============================================================================
 #■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+import time
 import requests
 from bs4 import BeautifulSoup
 
@@ -30,7 +31,6 @@ sourceID = 'TEST'
 
 #【FLW】==============================================================================
 
-
 #====為替 ドル円 チャート（なぜか取得されない）=======================
 """
 rq = requests.get("https://nikkei225jp.com/oil/")
@@ -49,10 +49,18 @@ def main_bk(maxNo):
 
 def main(maxNo):
     #====井上のサイト=============================================================
+    #井上のサイトはなぜかリクエストが遅い
+    """
+    #処理開始時刻を取得
+    tm_start = time.time()
     #サイトのURLを指定してリクエストを取得する
     rq = requests.get("https://inoshunnomad.com/")
     rq = requests.get("https://inoshunnomad.com/page/2")
     rq = requests.get("https://inoshunnomad.com/quit-thoughts")
+    #処理終了時刻を取得
+    tm_finish = time.time()
+    print("井上のサイトのリクエスト処理にかかった時間 ：",round(tm_finish - tm_start,2),"秒")
+    """
     #==============================================================================
     #====ネット競馬=============================================================
     #ネット競馬のニュースはwebスクしづらい
@@ -69,6 +77,8 @@ def main(maxNo):
     #==============================================================================
 
     #====極ウマくん=============================================================
+    #処理開始時刻を取得 
+    tm_start = time.time()
     #サイトのURLを指定してリクエストを取得する
     rq = requests.get("https://p.nikkansports.com/goku-uma/news/")
     #定型文、'html.parser'を使うよりも'lxml'を使う方が早いらしい
@@ -77,7 +87,7 @@ def main(maxNo):
     #soup_backNumberArea = soup.find_all("",{"id":"backNumberArea"})
     soup_backNumberArea = soup.find_all(id="backNumberArea")
     #ニュースタイトルとurlのリストを作りたい
-    list_news_Info = []
+    list_news_Info_gokum = []
     for soup_backNumber in soup_backNumberArea:
         #ニュースリンクリストの情報からさらにaタグのみを取得する
         list_soup_news = soup_backNumber.find_all('a')
@@ -89,10 +99,49 @@ def main(maxNo):
             newsURL ="https://p.nikkansports.com/goku-uma/news/" + soup_news.get("href")
             json_newsInfo = {"newsTitle":newsTitle,"newsURL":newsURL}
             #リストに追加する
-            list_news_Info.append(json_newsInfo)
+            list_news_Info_gokum.append(json_newsInfo)
             if not maxNo == 0 and i >= maxNo:
                 break
-            
+    #処理終了時刻を取得
+    tm_finish = time.time()
+    print("極ウマくんのサイトのスクレイピング処理にかかった時間 ：",round(tm_finish - tm_start,2),"秒")
+    #==============================================================================
+    #====YouTube:競馬=============================================================
+    #youtubeもダメ
+    """
+    #処理開始時刻を取得 
+    tm_start = time.time()
+    #サイトのURLを指定してリクエストを取得する
+    rq = requests.get("https://www.youtube.com/channel/UCy-lzeGfBo0R6EjhK1AkcLg")
+    #定型文、'html.parser'を使うよりも'lxml'を使う方が早いらしい
+    soup = BeautifulSoup(rq.content, 'html.parser')
+    #ニュースリンクのリストが表示されているエリア内の情報を全て取得
+    soup_img = soup.find_all("iframe")
+    print("soup_img:",soup_img)
+    #処理終了時刻を取得
+    tm_finish = time.time()
+    print("YouTube:競馬のスクレイピング処理にかかった時間 ：",round(tm_finish - tm_start,2),"秒")
+    """
+    #==============================================================================
+    #====亀谷重正公式サイト=============================================================
+    #処理開始時刻を取得 
+    tm_start = time.time()
+    #サイトのURLを指定してリクエストを取得する
+    rq = requests.get("https://k-beam.com/media")
+    #定型文、'html.parser'を使うよりも'lxml'を使う方が早いらしい
+    soup = BeautifulSoup(rq.content, 'html.parser')
+    #「クラス：movie__flex__video」の中の「タグ：a」の「属性：href」を取得（最初の最初）
+    newsVideo_kametani_url = soup.select(".movie__flex__video")[0].find_all("a")[0].get("href")
+    newsVideo_kametani_imgSrc = soup.select(".movie__flex__video")[0].find_all("img")[0].get("src")
+    json_newsVideoKametanInfo = {"newsVideo_kametani_url":newsVideo_kametani_url,
+                                "newsVideo_kametani_imgSrc":newsVideo_kametani_imgSrc}
+    #処理終了時刻を取得
+    tm_finish = time.time()
+    print("亀谷重正公式サイトのスクレイピング処理にかかった時間 ：",round(tm_finish - tm_start,2),"秒")
     #==============================================================================
     return_value = soup.findAll("a",text=True)
-    return list_news_Info
+    json_keibaInfo = {
+        "list_news_Info_gokum":list_news_Info_gokum,
+        "json_newsVideoKametanInfo":json_newsVideoKametanInfo
+        }
+    return json_keibaInfo

@@ -13,8 +13,7 @@ flg_return==1の時、「path_name」必須
 from django.urls import reverse
 from . import S999_SampleService
 from . import (C010_Const,C030_MessageUtil,
-                S180_HANYOMSTSHTK,
-                S060_ShitsmnListShutk_Shinchk
+                S185_UserInfoShutk_SysLogin
 )
 
 def main(request):
@@ -34,8 +33,31 @@ def main(request):
             bottunパターンによって処理を分けたりもするかも。
             例は、redirect
             """
-            flg_return = "1"
-            path_name = 'sample_url2'
+            #--S185-------------------------------------------------------------------------
+            #サービス呼び出し
+            loginID = request.POST['loginID']
+            loginPass = request.POST['loginPass']
+            json_S185 = S185_UserInfoShutk_SysLogin.main(loginID,loginPass)
+            #個々の値を取得
+            flg_S185 = json_S185["json_CommonInfo"]["errflg"]
+            list_msgInfo_S185 = json_S185["json_CommonInfo"]["list_msgInfo"]
+            str_userID_S185 = json_S185["str_userID"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S185)
+            #-------------------------------------------------------------------------------
+            #認証OKの場合、Topページにリダイレクト
+            if flg_S185 == "0" :
+                flg_return = "1"
+                path_name = 'teachersapp:topPage'
+            #認証NGの場合、ログインページをレンダー
+            elif flg_S185 == "1" :
+                flg_return = "0"
+                template = 'teachersapp/T020_Login.html'
+                context = {**context,**{
+                                        "loginID":loginID,
+                                        #"loginPass":loginPass,
+                                        }
+                        }
         else:
             #POST以外の場合
             """
@@ -46,15 +68,17 @@ def main(request):
             """
             #サービスを利用する場合は呼び出す
             """
-            #--S060-------------------------------------------------------------------------
+            #--S185-------------------------------------------------------------------------
             #サービス呼び出し
-            json_S060 = S060_ShitsmnListShutk_Shinchk.main()
+            loginID = request.POST['loginID']
+            loginPass = request.POST['loginPass']
+            json_S185 = S185_UserInfoShutk_SysLogin.main(loginID,loginPass)
             #個々の値を取得
-            flg_S060 = json_S060["json_CommonInfo"]["errflg"]
-            list_msgInfo_S060 = json_S060["json_CommonInfo"]["list_msgInfo"]
-            list_T100_shitsmnList_shinchk_S060 = json_S060["list_T100_shitsmnList_shinchk"]
+            flg_S185 = json_S185["json_CommonInfo"]["errflg"]
+            list_msgInfo_S185 = json_S185["json_CommonInfo"]["list_msgInfo"]
+            str_userID_S185 = json_S185["str_userID"]
             #メッセージ格納
-            C030_MessageUtil.setMessageList(request,list_msgInfo_S060)
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S185)
             #-------------------------------------------------------------------------------
             """
             #戻り値にセット

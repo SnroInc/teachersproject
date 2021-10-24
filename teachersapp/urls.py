@@ -7,7 +7,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 app_name = 'teachersapp'
 urlpatterns = [
-    #Sample
+    #main
     path('', views.v010_TopPage, name='topPage'),
     path('login/', views.v020_LoginView, name='login'),
     path('shitsmnsaksi/', views.v030_ShitsmnSaksiView, name='shitsmnsaksi'),
@@ -16,7 +16,9 @@ urlpatterns = [
     path('userKoshn/', views.v120_UserKoshn, name='userKoshn'),
     path('myPage/', views.v110_ProfileView, name='myPage'),
     path('success/', views.v910_SuccessView, name='success'),
+    path('systemError/', views.v999_SystemError, name='systemError'),
+    #Sample
     path('Sample/', views.v999_sampleMethod, name='sample_path1'),
     path('Sample2/', views.v999_sampleMethod2, name='sample_path2'),
-    path('systemError/', views.v999_SystemError, name='systemError'),
+    path('test01/', views.test01, name='test01'),
 ] + static (settings.STATIC_URL, document_root=settings.STATIC_ROOT)

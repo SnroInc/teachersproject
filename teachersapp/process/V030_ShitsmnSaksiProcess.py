@@ -87,9 +87,9 @@ def main(request):
             #戻り値にセット
             flg_return = "0"
             template = 'teachersapp/T030_ShitsmnSaksi.html'
-            list_newsInfo = S006_GetKeibaNews.main(10)
+            json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context,**{
-                                    "list_newsInfo":list_newsInfo,
+                                    "json_keibaInfo":json_keibaInfo,
                                     }
                     }
         

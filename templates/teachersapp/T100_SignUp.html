@@ -1,7 +1,13 @@
 {% extends "teachersapp/T000_Base.html" %}
 
 {% block head %}
-
+<script>
+    //ユーザ登録
+    function userTork() {
+        document.getElementById('form').action="{% url 'teachersapp:signUp' %}";
+        document.getElementById('form').submit();
+    }
+</script>
 {% endblock head %}
 
 {% block content %}
@@ -18,13 +24,12 @@
                 <form id='form' name='form' method="post" action="{% url 'teachersapp:signUp' %}">{% csrf_token %}
                     <div class="form-group">
                         <label>表示名</label>
-                        <input type="text" id="userName" name="userName" class="form-control"
-                            placeholder="山本しゅんろー">
+                        <input type="text" id="userName" name="userName" class="form-control" placeholder="山本しゅんろー">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>メールアドレス</label>
-                        <input type="text" id="mailAddress" name="mailAddress" class="form-control"
+                        <input type="email" id="mailAddress" name="mailAddress" class="form-control"
                             placeholder="#tsunekawa.h@jp.snro.com">
                     </div>
                     <br>
@@ -40,13 +45,14 @@
                     <br>
                     <div class="form-group">
                         <label>ログインパスワード(確認用)</label>
-                        <input type="text" id="loginPass_conf" name="loginPass_conf" class="form-control" placeholder="確認用">
+                        <input type="text" id="loginPass_conf" name="loginPass_conf" class="form-control"
+                            placeholder="確認用">
                     </div>
                     <br>
                     <hr>
                     <div class="row justify-content-start">
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-success btn-block" >新規登録</button>
+                            <button type="button" onclick="userTork();" class="btn btn-success btn-block">新規登録</button>
                         </div>
                         <div class="col-md-6">
                             <a class="btn btn-muted btn-block" href="{% url 'teachersapp:topPage' %}">キャンセル</a>
