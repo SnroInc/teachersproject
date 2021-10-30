@@ -35,7 +35,7 @@ def main(shitsmnID, int_seq):
         if len(rows) == 0 :
             errflg = "1"
             msgID = "E0002"
-            tuple_msgPalams = ("回答リクエスト")
+            tuple_msgPalams = ("回答リクエスト",)
             json_msgInfo = C030_MessageUtil.getMessageInfo(msgID,tuple_msgPalams)
             list_msgInfo.append(json_msgInfo) 
 

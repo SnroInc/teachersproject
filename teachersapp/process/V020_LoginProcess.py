@@ -45,9 +45,13 @@ def main(request):
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S185)
             #-------------------------------------------------------------------------------
-            #認証OKの場合、Topページにリダイレクト
+            #認証OKの場合、セッションにユーザIDを格納してからTopページにリダイレクト
             if flg_S185 == "0" :
+                #セッションにuserIDを追加
+                request.session['userID'] = str_userID_S185
+                #1：リダイレクトを指定する
                 flg_return = "1"
+                #テンプレートを指定する
                 path_name = 'teachersapp:topPage'
             #認証NGの場合、ログインページをレンダー
             elif flg_S185 == "1" :
