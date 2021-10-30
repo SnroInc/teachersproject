@@ -9,6 +9,7 @@ from .process import (
     V030_ShitsmnSaksiProcess,
     V100_SignUp,
     V110_Profile,
+    V115_MyPage,
     V120_UserKoshn
 )
 from .process import C010_Const,C030_MessageUtil
@@ -129,6 +130,29 @@ def v110_ProfileView(request):
         return redirect(PATH_ERR)
 
 
+#マイページ
+def v115_MyPageView(request):
+    try:
+        #ビュープロセスクラスを呼び出し
+        json_view = V115_MyPage.main(request)
+        #「render」か「redirect」かを判断
+        flg_return = json_view["flg_return"]
+        if flg_return == "0":
+            #「render」の場合
+            context = json_view["context"]
+            template = json_view["template"]
+            return render(request, template, context)
+        elif flg_return == "1":
+            #「redirect」の場合
+            path_name = json_view["path_name"]
+            return redirect(path_name)
+    except Exception as e :
+        #システムエラー共通処理
+        C030_MessageUtil.systemErrorCommonMethod()
+        #システムエラー画面に遷移
+        return redirect(PATH_ERR)
+
+
 #ユーザ情報更新
 def v120_UserKoshn(request):
     try:
@@ -175,6 +199,14 @@ def v910_SuccessView(request):
 
 
 #===テストorサンプルメソッド========================================================================
+def post_comment(request, new_comment):
+    if request.session.get('has_commented', False):
+        return HttpResponse("You've already commented.")
+    c = comments.Comment(comment=new_comment)
+    c.save()
+    request.session['has_commented'] = True
+    return HttpResponse('Thanks for your comment!')
+
 def v999_sampleMethod(request):
     try:
         #ビュープロセスクラスを呼び出し

@@ -1,6 +1,6 @@
 """
 ビュークラス
-V110_Profile
+V115_MyPage
 質問作成ページ用View
 エラーフラグ：0(正常終了),1(業務エラー),2(システムエラー)
 flg_return：0(render),1(redirect)
@@ -73,13 +73,14 @@ def main(request):
             """
             #サービスのパラメータをリクエストから取得する--------------------------------------
             #マイページを表示する場合
-            userID = "XXXXXXXXXXXXXXXXX"
+            userID = request.session['userID']
             #相手のプロフィールを表示する場合
             #未実装
             #サービスのパラメータをリクエストから取得する--------------------------------------
             #--S180-------------------------------------------------------------------------
             #サービス呼び出し
             json_S180 = S180_UserInfoShutk.main(userID)
+            print("json_S180:",json_S180)
             #個々の値を取得
             flg_S180 = json_S180["json_CommonInfo"]["errflg"]
             list_msgInfo_S180 = json_S180["json_CommonInfo"]["list_msgInfo"]
@@ -87,8 +88,10 @@ def main(request):
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S180)
             #-------------------------------------------------------------------------------
-            #ログインパスワードをクリアする
-            json_userInfo_S180["LOGINPASS"] = ""
+            #ログインユーザと取得ユーザが異なる場合、戻り値からパスワードを除外する
+            loginUserID = request.session['userID']
+            if not userID == loginUserID :
+                json_userInfo_S180["LOGINPASS"] = ""
             
             #戻り値にセット
             flg_return = "0"

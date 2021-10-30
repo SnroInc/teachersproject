@@ -35,7 +35,7 @@ def main(userID):
         if len(rows) == 0 :
             errflg = "1"
             msgID = "E0002"
-            tuple_msgPalams = ("このユーザ")
+            tuple_msgPalams = ("このユーザ",)
             json_msgInfo = C030_MessageUtil.getMessageInfo(msgID,tuple_msgPalams)
             list_msgInfo.append(json_msgInfo) 
         else:

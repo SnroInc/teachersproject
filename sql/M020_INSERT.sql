@@ -1,6 +1,8 @@
 #DB選択
 USE TEACHERSDB;
 
+select * from M020_MSGMST
+
 #M020
 #DEBUG用メッセージ-----------------------------------------------------------------------------------------------------
 INSERT INTO M020_MSGMST VALUES ('D0000','D','@1','S000','SYSTEM000000000000',current_timestamp(6),'S000','SYSTEM000000000000',current_timestamp(6),'0');

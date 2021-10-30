@@ -13,8 +13,8 @@ urlpatterns = [
     path('shitsmnsaksi/', views.v030_ShitsmnSaksiView, name='shitsmnsaksi'),
     path('signUp/', views.v100_SignUpView, name='signUp'),
     path('profile/', views.v110_ProfileView, name='profile'),
+    path('myPage/', views.v115_MyPageView, name='myPage'),
     path('userKoshn/', views.v120_UserKoshn, name='userKoshn'),
-    path('myPage/', views.v110_ProfileView, name='myPage'),
     path('success/', views.v910_SuccessView, name='success'),
     path('systemError/', views.v999_SystemError, name='systemError'),
     #Sample
