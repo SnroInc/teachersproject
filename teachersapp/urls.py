@@ -12,6 +12,7 @@ urlpatterns = [
     path('login/', views.v020_LoginView, name='login'),
     path('logout/', views.v025_Logout, name='logout'),
     path('shitsmnsaksi/', views.v030_ShitsmnSaksiView, name='shitsmnsaksi'),
+    path('shitsmnDetail/', views.v050_ShitsmnDetailView, name='shitsmnDetail'),
     path('shitsmnShosi/<str:shitsmnID>/kaitRQTork/', views.v060_KaitRQTorkView, name='kaitRQTork'),
     path('shitsmnShosi/<str:shitsmnID>/kaitRQList/', views.v070_KaitRQListView, name='kaitRQList'),
     path('signUp/', views.v100_SignUpView, name='signUp'),

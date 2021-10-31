@@ -1,7 +1,7 @@
 """
 ビュークラス
-V030_ShitsmnSaksiProcess
-質問作成ページ用View
+V050_ShitsmnDetailProcess
+質問詳細View
 エラーフラグ：0(正常終了),1(業務エラー),2(システムエラー)
 flg_return：0(render),1(redirect)
 
@@ -17,6 +17,7 @@ from . import (C010_Const, C030_MessageUtil,
                S006_GetKeibaNews,
                S020_ShitsmnInfoTork
                )
+
 
 def main(request):
     # --View共通----------------------------------------------
@@ -94,7 +95,7 @@ def main(request):
             """
             # 戻り値にセット
             flg_return = "0"
-            template = 'teachersapp/T030_ShitsmnSaksi.html'
+            template = 'teachersapp/T050_ShitsmnDetail.html'
             json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context, **{
                 "json_keibaInfo": json_keibaInfo,
