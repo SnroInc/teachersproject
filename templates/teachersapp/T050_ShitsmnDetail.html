@@ -1,0 +1,95 @@
+{% extends "teachersapp/T000_Base.html" %}
+
+{% block head %}
+<script>
+    function shitsmnSaksei() {
+        document.getElementById('form').action = "{% url 'teachersapp:shitsmnsaksi' %}";
+        document.getElementById('form').submit();
+    }
+</script>
+{% endblock head %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row gx-3">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-8">
+            <div class="p-3 mb-2 bg-light text-dark">
+                <br>
+                <title>DBから取得した情報を表示（仮）</title>
+                <h2>DBから取得した情報を表示（仮）</h2>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">DBから取得した情報を表示する(内容)</h6>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">DBから取得した情報を表示する(ハッシュタグ)</h6>
+                    </div>
+
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">会議希望時間</h6>
+                        <br>
+                        <p>第一希望</p>
+                        <p>第二希望</p>
+                        <p>第三希望</p>
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-start">
+                        <button type="button" class="btn btn-muted btn-block">閉じる</button>   
+                        <button type="button" onclick="shitsmnSaksei();" class="btn btn-success btn-block">回答する</button>
+                        <a href="{% url 'teachersapp:topPage' %}">
+                            <button type="button" class="btn btn-muted btn-block">閉じる</button>
+                        </a>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-3">
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <h6>★今日の一押し★</h6>
+                <div class="video">
+                    <!-- <label>どこまでいってもにげてやる</label> -->
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UKESIh9fEfA" title="YouTube video player"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <br>
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <div class="">
+                    <h5 class="tp_bg_newsAreaTitle">★新着ニュース</h5>
+                    {% for json_newsInfo in json_keibaInfo.list_news_Info_gokum %}
+
+                    <a class="text-decoration-none text-dark" href="{{json_newsInfo.newsURL}}" target="_blank">
+                        <div class="tp_bg_newsArea">
+                            <p>{{json_newsInfo.newsTitle}}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
+        </div>
+    </div>
+
+    <br>
+</div>
+
+
+
+
+
+{% endblock content %}

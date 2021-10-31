@@ -11,6 +11,7 @@ urlpatterns = [
     path('', views.v010_TopPage, name='topPage'),
     path('login/', views.v020_LoginView, name='login'),
     path('shitsmnsaksi/', views.v030_ShitsmnSaksiView, name='shitsmnsaksi'),
+    path('shitsmnDetail/', views.v050_ShitsmnDetailView, name='shitsmnDetail'),
     path('signUp/', views.v100_SignUpView, name='signUp'),
     path('profile/', views.v110_ProfileView, name='profile'),
     path('myPage/', views.v115_MyPageView, name='myPage'),

@@ -4,3 +4,5 @@ teachersapp/__pycache__
 teachersapp/process/__pycache__
 #settings.pyファイル
 #teachersproject/settings.py
+#不要.vscode
+.vscode
