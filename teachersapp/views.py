@@ -7,6 +7,7 @@ from .process import (
     V010_TopPageProcess,
     V020_LoginProcess,
     V030_ShitsmnSaksiProcess,
+    V050_ShitsmnDetailProcess,
     V100_SignUp,
     V110_Profile,
     V115_MyPage,
@@ -66,6 +67,28 @@ def v030_ShitsmnSaksiView(request):
     try:
         #ビュープロセスクラスを呼び出し
         json_view = V030_ShitsmnSaksiProcess.main(request)
+        #「render」か「redirect」かを判断
+        flg_return = json_view["flg_return"]
+        if flg_return == "0":
+            #「render」の場合
+            context = json_view["context"]
+            template = json_view["template"]
+            return render(request, template, context)
+        elif flg_return == "1":
+            #「redirect」の場合
+            path_name = json_view["path_name"]
+            return redirect(path_name)
+    except Exception as e :
+        #システムエラー共通処理
+        C030_MessageUtil.systemErrorCommonMethod()
+        #システムエラー画面に遷移
+        return redirect(PATH_ERR)
+
+#質問詳細
+def v050_ShitsmnDetailView(request):
+    try:
+        #ビュープロセスクラスを呼び出し
+        json_view = V050_ShitsmnDetailProcess.main(request)
         #「render」か「redirect」かを判断
         flg_return = json_view["flg_return"]
         if flg_return == "0":

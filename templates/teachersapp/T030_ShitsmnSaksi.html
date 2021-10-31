@@ -24,20 +24,17 @@
                 <form id='form' name='form' method="post">{% csrf_token %}
                     <div class="form-group">
                         <label>タイトル：</label>
-                        <input type="text" id="shitsmnTitle" name="shitsmnTitle" class="form-control"
-                            placeholder="ぱーちんのだちがやられた件">
+                        <input type="text" id="shitsmnTitle" name="shitsmnTitle" class="form-control" placeholder="ぱーちんのだちがやられた件">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>ハッシュタグ：</label>
-                        <input type="text" id="hashTags" name="hashTags" class="form-control"
-                            placeholder="#ぱーちん #おさない #めびうす">
+                        <input type="text" id="hashTags" name="hashTags" class="form-control" placeholder="#ぱーちん #おさない #めびうす">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>質問内容：</label>
-                        <textarea class="form-control" id="shitsmnNaiyo" name="shitsmnNaiyo" rows="15"
-                            placeholder="ひよってるやついるぅぅぅぅ？"></textarea>
+                        <textarea class="form-control" id="shitsmnNaiyo" name="shitsmnNaiyo" rows="15" placeholder="ひよってるやついるぅぅぅぅ？"></textarea>
                     </div>
                     <br>
                     <div class="form-group">
@@ -45,16 +42,16 @@
                             <div class="col-md-4">
                                 <label for="kaigi1">会議時間 第一希望：</label>
                             </div>
-                            <div class="col-md-3">
-                                <input type="datetime-local" class="form-control" id="kaigi1">
+                            <div class="col-md-4">
+                                <input type="datetime-local" name="sTime1" id="sTime1" step="900" class="form-control">
                             </div>
                             <div class="col-md-1">
                                 <p>から</p>
                             </div>
                             <div class="col-md-2">
-                                <select class="form-control">
+                                <select class="form-control" name="duration1" id="duration1">
                                     <!-- ここの時間はDBから取得してfor文で回すように変更予定 -->
-                                    <option>o</option>
+                                    <option>0</option>
                                     <option>15</option>
                                     <option>30</option>
                                     <option>45</option>
@@ -70,16 +67,16 @@
                             <div class="col-md-4">
                                 <label for="kaigi2">会議時間 第二希望：</label>
                             </div>
-                            <div class="col-md-3">
-                                <input type="datetime-local" class="form-control" id="kaigi2">
+                            <div class="col-md-4">
+                                <input type="datetime-local" name="sTime2" step="900" class="form-control" id="kaigi2">
                             </div>
                             <div class="col-md-1">
                                 <p>から</p>
                             </div>
                             <div class="col-md-2">
-                                <select class="form-control">
+                                <select class="form-control" name="duration2">
                                     <!-- ここの時間はDBから取得してfor文で回すように変更予定 -->
-                                    <option>o</option>
+                                    <option>0</option>
                                     <option>15</option>
                                     <option>30</option>
                                     <option>45</option>
@@ -95,16 +92,16 @@
                             <div class="col-md-4">
                                 <label for="kaigi3">会議時間 第三希望：</label>
                             </div>
-                            <div class="col-md-3">
-                                <input type="datetime-local" class="form-control" id="kaigi3">
+                            <div class="col-md-4">
+                                <input type="datetime-local" name="sTime3" step="900" class="form-control" id="kaigi3">
                             </div>
                             <div class="col-md-1">
                                 <p>から</p>
                             </div>
                             <div class="col-md-2">
-                                <select class="form-control">
+                                <select class="form-control" name="duration3">
                                     <!-- ここの時間はDBから取得してfor文で回すように変更予定 -->
-                                    <option>o</option>
+                                    <option>0</option>
                                     <option>15</option>
                                     <option>30</option>
                                     <option>45</option>
@@ -117,11 +114,12 @@
                     <br>
                     <div class="row justify-content-start">
                         <div class="col-md-6">
-                            <button type="button" onclick="shitsmnSaksei();"
-                                class="btn btn-success btn-block">新規登録</button>
+                            <button type="button" onclick="shitsmnSaksei();" class="btn btn-success btn-block">新規登録</button>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-muted btn-block">閉じる</button>
+                            <a href="{% url 'teachersapp:topPage' %}">
+                                <button type="button" class="btn btn-muted btn-block">閉じる</button>
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -133,9 +131,8 @@
                 <h6>★今日の一押し★</h6>
                 <div class="video">
                     <!-- <label>どこまでいってもにげてやる</label> -->
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UKESIh9fEfA"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UKESIh9fEfA" title="YouTube video player"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>
                 </div>
