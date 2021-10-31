@@ -4,14 +4,13 @@
 <script>
     //ユーザ登録
     function userTork() {
-        document.getElementById('form').action="{% url 'teachersapp:signUp' %}";
+        document.getElementById('form').action = "{% url 'teachersapp:signUp' %}";
         document.getElementById('form').submit();
     }
 </script>
 {% endblock head %}
 
 {% block content %}
-
 <div class="container">
     <div class="row gx-3">
         <div class="col-md-1">
@@ -24,18 +23,20 @@
                 <form id='form' name='form' method="post" action="{% url 'teachersapp:signUp' %}">{% csrf_token %}
                     <div class="form-group">
                         <label>表示名</label>
-                        <input type="text" id="userName" name="userName" class="form-control" placeholder="山本しゅんろー">
+                        <input type="text" id="userName" name="userName" class="form-control" placeholder="山本しゅんろー"
+                            value="{{userName}}">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>メールアドレス</label>
                         <input type="email" id="mailAddress" name="mailAddress" class="form-control"
-                            placeholder="#tsunekawa.h@jp.snro.com">
+                            placeholder="#tsunekawa.h@jp.snro.com" value="{{mailAddress}}">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>ログインID</label>
-                        <input type="text" id="loginID" name="loginID" class="form-control" placeholder="#Y.Snro">
+                        <input type="text" id="loginID" name="loginID" class="form-control" placeholder="#Y.Snro"
+                            value="{{loginID}}">
                     </div>
                     <br>
                     <div class="form-group">

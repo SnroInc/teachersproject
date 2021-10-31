@@ -41,6 +41,8 @@
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
+                        <!-- サインイン状態 -->
+                        {% if request.session.userID %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'teachersapp:shitsmnsaksi' %}">質問作成</a>
                         </li>
@@ -49,11 +51,21 @@
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'teachersapp:login' %}">ログイン</a>
+                            <a class="nav-link" href="{% url 'teachersapp:logout' %}">サインアウト</a>
+                        </li>
+                        <!-- サインアウト状態 -->
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'teachersapp:shitsmnsaksi' %}">質問作成</a>
+                        </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'teachersapp:login' %}">サインイン</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'teachersapp:signUp' %}">サインアップ</a>
                         </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'teachersapp:test01' %}">テスト01</a>
                         </li>
@@ -66,7 +78,7 @@
                 </div>
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
-
+                    {{ request.session.userName }}さん
                     <!-- Notifications -->
                     <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
                         role="button" data-mdb-toggle="dropdown" aria-expanded="false">
@@ -110,7 +122,26 @@
     <!-- Navbar -->
 
     <main class='container'>
-
+        <br>テスト:セッション内容確認------------------
+        <br>{{ request.session.userID }}
+        <br>{{ request.session.userName }}
+        <br>{{ request.session.bookedPage }}
+        <br>----------------------------------------
+        <!-- メッセージ表示エリア-------------------------------------------------- -->
+        {% if messages %}
+        <div class="container">
+            <div class="alert alert-info" role="alert">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% for message in messages %}
+                        <p class="non_margen">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <!-- メッセージ表示エリア-------------------------------------------------- -->
         <!-- ★後ほど実装★　何かメッセージがあればヘッダーの下に表示させたい。優先度低め -->
         <!-- {% if messages %} -->
         <!-- <br> -->

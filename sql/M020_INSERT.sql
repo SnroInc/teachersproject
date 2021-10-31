@@ -25,5 +25,7 @@ INSERT INTO M020_MSGMST VALUES ('E0000','E','@1','S000','SYSTEM000000000000',cur
 INSERT INTO M020_MSGMST VALUES ('E0001','E','@1を入力してください','S000','SYSTEM000000000000',current_timestamp(6),'S000','SYSTEM000000000000',current_timestamp(6),'0');
 INSERT INTO M020_MSGMST VALUES ('E0002','E','@1が存在しません。','S000','SYSTEM000000000000',current_timestamp(6),'S000','SYSTEM000000000000',current_timestamp(6),'0');
 INSERT INTO M020_MSGMST VALUES ('E0003','E','ログインIDまたはパスワードが間違っています。','S000','SYSTEM000000000000',current_timestamp(6),'S000','SYSTEM000000000000',current_timestamp(6),'0');
+INSERT INTO M020_MSGMST VALUES ('E0004','E','この@1は使用できません。','S000','SYSTEM000000000000',current_timestamp(6),'S000','SYSTEM000000000000',current_timestamp(6),'0');
+INSERT INTO M020_MSGMST VALUES ('E0004','E','@1と@2が一致しません。','S000','SYSTEM000000000000',current_timestamp(6),'S000','SYSTEM000000000000',current_timestamp(6),'0');
 
 

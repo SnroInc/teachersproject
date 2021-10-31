@@ -18,7 +18,6 @@ from . import (C010_Const, C030_MessageUtil,
                S020_ShitsmnInfoTork
                )
 
-
 def main(request):
     # --View共通----------------------------------------------
     # 戻り値用の変数宣言

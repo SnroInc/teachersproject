@@ -11,7 +11,6 @@ flg_return==1の時、「path_name」必須
 """
 
 from django.urls import reverse
-from . import S999_SampleService
 from . import (C010_Const,C030_MessageUtil,
                 S185_UserInfoShutk_SysLogin
 )
@@ -42,13 +41,17 @@ def main(request):
             flg_S185 = json_S185["json_CommonInfo"]["errflg"]
             list_msgInfo_S185 = json_S185["json_CommonInfo"]["list_msgInfo"]
             str_userID_S185 = json_S185["str_userID"]
+            str_userName_S185 = json_S185["str_userName"]
             #メッセージ格納
             C030_MessageUtil.setMessageList(request,list_msgInfo_S185)
             #-------------------------------------------------------------------------------
             #認証OKの場合、セッションにユーザIDを格納してからTopページにリダイレクト
             if flg_S185 == "0" :
+                #セッション処理----------------------------------------------------
                 #セッションにuserIDを追加
                 request.session['userID'] = str_userID_S185
+                request.session['userName'] = str_userName_S185
+                #----------------------------------------------------------------
                 #1：リダイレクトを指定する
                 flg_return = "1"
                 #テンプレートを指定する
