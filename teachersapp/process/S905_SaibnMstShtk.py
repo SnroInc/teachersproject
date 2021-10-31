@@ -30,7 +30,7 @@ def main(tableID,header):
         int_newSeq = C020_DBUtil.executeSQL(json_DBConnectInfo,sql_1,args_1)[0]["NEWSEQ"]
         #　A. 取得行が0行の場合、「最大値+1=1」とする。 B.取得行が1行以上の場合、「最大値+1」を取得する。
         #int_newSeq = 1
-        #if not C050_StringUtil.isNullCharacter(str_newSeq) :
+        #if not C050_StringUtil.isEmpty(str_newSeq) :
         #    int_newSeq = int(str_newSeq)
 
         #③「①」の日付、「②」の最大値+1を、シーケンステーブルに登録する。

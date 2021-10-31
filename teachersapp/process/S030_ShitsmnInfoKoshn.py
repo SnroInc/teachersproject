@@ -11,7 +11,7 @@ from . import C010_Const,C020_DBUtil,C030_MessageUtil,C050_StringUtil
 
 SERVICE_ID = "S030"
 
-def main(shitsmnID,shitsmnTitle,shitsmnNaiyo,shitsmnUserID,kaigiID,list_hashTag,list_kaigikibujikn,updUserID,delflg):
+def main(shitsmnID,shitsmnTitle,shitsmnNaiyo,shitsmnUserID,kaigiID,list_hashTag,list_kaigikibujikn,updUserID):
     #--戻り値用の変数宣言------------------------------------------------------------------------------
     errflg = "0"
     list_msgInfo = []
@@ -26,19 +26,19 @@ def main(shitsmnID,shitsmnTitle,shitsmnNaiyo,shitsmnUserID,kaigiID,list_hashTag,
         list_args_T100 = []
         sql_T100 = "update t100_shitsmn \
                     set "
-        if not C050_StringUtil.isNullCharacter(shitsmnTitle):
+        if not C050_StringUtil.isNull(shitsmnTitle):
             sql_T100 = sql_T100 + "SHITSMN_TITLE = %s, "
             list_args_T100.append(shitsmnTitle)
-        if not C050_StringUtil.isNullCharacter(shitsmnNaiyo):
+        if not C050_StringUtil.isNull(shitsmnNaiyo):
             sql_T100 = sql_T100 + "SHITSMN_NAIYO = %s, "
             list_args_T100.append(shitsmnNaiyo)
-        if not C050_StringUtil.isNullCharacter(shitsmnUserID):
+        if not C050_StringUtil.isNull(shitsmnUserID):
             sql_T100 = sql_T100 + "SHITSMN_USERID = %s, "
             list_args_T100.append(shitsmnUserID)
-        if not C050_StringUtil.isNullCharacter(kaigiID):
+        if not C050_StringUtil.isNull(kaigiID):
             sql_T100 = sql_T100 + "KAIGIID = %s, "
             list_args_T100.append(kaigiID)
-        #if not C050_StringUtil.isNullCharacter(delflg):
+        #if not C050_StringUtil.isNull(delflg):
         #    sql_T100 = sql_T100 + "DELFLG = %s,"
         sql_T100 = sql_T100 + "UPDSRV = %s, "
         list_args_T100.append(SERVICE_ID)
@@ -47,7 +47,7 @@ def main(shitsmnID,shitsmnTitle,shitsmnNaiyo,shitsmnUserID,kaigiID,list_hashTag,
         sql_T100 = sql_T100 + "UPDDATE = current_timestamp(6) "
         sql_T100 = sql_T100 + "where SHITSMN_ID = %s "
         list_args_T100.append(shitsmnID)
-        sql_T100 = sql_T100 + ";"
+        sql_T100 = sql_T100 + "and DELFLG = '0' ;"
         args_T100 = tuple(list_args_T100)
         
         #T101(全削除全登録の、DELINによる洗い替え)

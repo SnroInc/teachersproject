@@ -12,7 +12,6 @@ flg_return==1の時、「path_name」必須
 
 import datetime
 from django.urls import reverse
-from . import S999_SampleService
 from . import (C010_Const,C030_MessageUtil,
                 S006_GetKeibaNews,
                 S020_ShitsmnInfoTork

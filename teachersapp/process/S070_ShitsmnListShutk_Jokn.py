@@ -51,24 +51,24 @@ def main(keyWord,list_hashTag,date_From,date_To,selfQ_userID, selfRQ_userID):
                                         AND t102.SEQ = t120.SEQ \
                                         AND t120.DELFLG = '0' \
                                     where t100.DELFLG = '0' "
-        if not C050_StringUtil.isNullCharacter(keyWord):
+        if not C050_StringUtil.isNull(keyWord):
             sql = sql + "               AND ((t100.SHITSMN_TITLE like %s) or (t100.SHITSMN_NAIYO like %s))"
             keyWord = "%" + keyWord + "%"
             list_args.append(keyWord)
             list_args.append(keyWord)
-        if not C050_StringUtil.isNullCharacter(selfQ_userID):        
+        if not C050_StringUtil.isNull(selfQ_userID):        
             sql = sql + "               AND t100.SHITSMN_USERID = %s "
             list_args.append(selfQ_userID)
         if not C060_ListUtil.isZeroList(list_hashTag):   
             sql = sql + "               AND t101.HASHTAG in %s "
             list_args.append(list_hashTag)
-        if not C050_StringUtil.isNullCharacter(date_From):
+        if not C050_StringUtil.isNull(date_From):
             sql = sql + "               AND t102.KAISHNCHJ >= %s " 
             list_args.append(date_From)
-        if not C050_StringUtil.isNullCharacter(date_To):   
+        if not C050_StringUtil.isNull(date_To):   
             sql = sql + "               AND t102.KAISHNCHJ <= %s "
             list_args.append(date_To)
-        if not C050_StringUtil.isNullCharacter(selfRQ_userID):   
+        if not C050_StringUtil.isNull(selfRQ_userID):   
             sql = sql + "               AND t120.KAIT_USERID = %s " 
             list_args.append(selfRQ_userID)
             sql = sql +     "           group by t100.SHITSMN_ID \

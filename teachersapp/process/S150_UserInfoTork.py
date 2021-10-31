@@ -27,7 +27,7 @@ def main(userName,mailAddress,loginID,loginPass,hyoka,userComment,loginKbn):
         #--DB連携基本コード----------------------------------------------------------------------------
         #DB接続開始、コネクションとカーソルを取得
         json_DBConnectInfo = C020_DBUtil.connectDB()
-        #--(2)クエリとパラメータを定義
+        #--(2.2.)クエリとパラメータを定義
         sql = "INSERT INTO M050_USER VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,current_timestamp(6),%s,%s,current_timestamp(6),%s);"
         args = (newID_S010,userName,mailAddress,loginID,loginPass,hyoka,userComment,loginKbn,SERVICE_ID,newID_S010,SERVICE_ID,newID_S010,"0",)
         #クエリを実行し、結果を取得

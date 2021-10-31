@@ -21,7 +21,7 @@ def main(seccd,cd):
         #DB接続開始、コネクションとカーソルを取得
         json_DBConnectInfo = C020_DBUtil.connectDB()
         args = ()
-        if C050_StringUtil.isNullCharacter(cd):
+        if C050_StringUtil.isNull(cd):
             #クエリを定義
             sql = "select SECCD,CD,HYOJIJN,NAIYO01,NAIYO02,NAIYO03,NAIYO04,NAIYO05,NAIYO06,NAIYO07,NAIYO08,NAIYO09,NAIYO10 from m101_hanyomst where SECCD = %s and DELFLG = '0' order by HYOJIJN asc ;"
             #パラメータを定義

@@ -1,0 +1,61 @@
+{% extends "teachersapp/T000_Base.html" %}
+<!-- <html-->
+
+<!-- <body> -->
+{% block content %}
+
+<br>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-8">
+            <h6>回答リクエスト一覧</h6>
+            {% if tuple_kaitRQList %}
+            {% for kaitRQList in tuple_kaitRQList %}
+            <div class="col-sm-6" type="button" onclick="kaitoRQShosi();">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">第{{ kaitRQList.SEQ }}希望</p>
+                        <h5 class="card-title">{{ kaitRQList.KAIT_USERID }}(本当はユーザ名を出す)</h5>
+                    </div>
+                </div>
+                <br>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <h6>★今日の一押し★</h6>
+                <a href="{{json_keibaInfo.json_newsVideoKametanInfo.newsVideo_kametani_url}}" target="_blank">
+                    <img class="tp_thumbnailImg"
+                        src="{{json_keibaInfo.json_newsVideoKametanInfo.newsVideo_kametani_imgSrc}}">
+                </a>
+            </div>
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <div class="">
+                    <h5 class="tp_bg_newsAreaTitle">★新着ニュース</h5>
+                    {% for json_newsInfo in json_keibaInfo.list_news_Info_gokum %}
+
+                    <a class="text-decoration-none text-dark" href="{{json_newsInfo.newsURL}}" target="_blank">
+                        <div class="tp_bg_newsArea">
+                            <p>{{json_newsInfo.newsTitle}}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+{% endblock content %}

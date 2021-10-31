@@ -6,7 +6,10 @@ from .process import (
     V999_SampleProcess,
     V010_TopPageProcess,
     V020_LoginProcess,
+    V025_Logout,
     V030_ShitsmnSaksiProcess,
+    V060_KaitRQTork,
+    V070_KaitRQList,
     V100_SignUp,
     V110_Profile,
     V115_MyPage,
@@ -61,6 +64,28 @@ def v020_LoginView(request):
         #システムエラー画面に遷移
         return redirect(PATH_ERR)
 
+#ログアウト
+def v025_Logout(request):
+    try:
+        #ビュープロセスクラスを呼び出し
+        json_view = V025_Logout.main(request)
+        #「render」か「redirect」かを判断
+        flg_return = json_view["flg_return"]
+        if flg_return == "0":
+            #「render」の場合
+            context = json_view["context"]
+            template = json_view["template"]
+            return render(request, template, context)
+        elif flg_return == "1":
+            #「redirect」の場合
+            path_name = json_view["path_name"]
+            return redirect(path_name)
+    except Exception as e :
+        #システムエラー共通処理
+        C030_MessageUtil.systemErrorCommonMethod()
+        #システムエラー画面に遷移
+        return redirect(PATH_ERR)
+
 #質問作成
 def v030_ShitsmnSaksiView(request):
     try:
@@ -83,6 +108,49 @@ def v030_ShitsmnSaksiView(request):
         #システムエラー画面に遷移
         return redirect(PATH_ERR)
 
+#回答RQ
+def v060_KaitRQTorkView(request,shitsmnID):
+    try:
+        #ビュープロセスクラスを呼び出し
+        json_view = V060_KaitRQTork.main(request,shitsmnID)
+        #「render」か「redirect」かを判断
+        flg_return = json_view["flg_return"]
+        if flg_return == "0":
+            #「render」の場合
+            context = json_view["context"]
+            template = json_view["template"]
+            return render(request, template, context)
+        elif flg_return == "1":
+            #「redirect」の場合
+            path_name = json_view["path_name"]
+            return redirect(path_name)
+    except Exception as e :
+        #システムエラー共通処理
+        C030_MessageUtil.systemErrorCommonMethod()
+        #システムエラー画面に遷移
+        return redirect(PATH_ERR)
+
+#回答RQ
+def v070_KaitRQListView(request,shitsmnID):
+    try:
+        #ビュープロセスクラスを呼び出し
+        json_view = V070_KaitRQList.main(request,shitsmnID)
+        #「render」か「redirect」かを判断
+        flg_return = json_view["flg_return"]
+        if flg_return == "0":
+            #「render」の場合
+            context = json_view["context"]
+            template = json_view["template"]
+            return render(request, template, context)
+        elif flg_return == "1":
+            #「redirect」の場合
+            path_name = json_view["path_name"]
+            return redirect(path_name)
+    except Exception as e :
+        #システムエラー共通処理
+        C030_MessageUtil.systemErrorCommonMethod()
+        #システムエラー画面に遷移
+        return redirect(PATH_ERR)
 
 #サインアップ
 def v100_SignUpView(request):

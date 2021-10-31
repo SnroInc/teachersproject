@@ -7,9 +7,16 @@ S140_KaitRQListShutk
 
 """
 
-from . import C020_DBUtil,C030_MessageUtil
+from . import C020_DBUtil,C030_MessageUtil,C070_IntegerUtil
 
 SERVICE_ID = "S140"
+
+"""
+うまくいかない
+def main(shitsmnID):
+    json_service = main(shitsmnID, None)
+    return json_service
+"""
 
 def main(shitsmnID, int_seq):
     #--戻り値用の変数宣言------------------------------------------------------------------------------
@@ -22,9 +29,16 @@ def main(shitsmnID, int_seq):
         #DB接続開始、コネクションとカーソルを取得
         json_DBConnectInfo = C020_DBUtil.connectDB()
         #クエリを定義
-        sql = "select * from T120_KAITREQUEST where SHITSMN_ID = %s and SEQ = %s and DELFLG = %s ;"
+        list_args = []
+        sql = "select * from T120_KAITREQUEST where SHITSMN_ID = %s "
+        list_args.append(shitsmnID)
+        if not C070_IntegerUtil.isNull(int_seq):
+            sql = sql + "and SEQ = %s "
+            list_args.append(int_seq)
+        sql = sql + "and DELFLG = %s ORDER BY SEQ;"
+        list_args.append("0")
         #パラメータを定義
-        args = (shitsmnID,int_seq,"0",)
+        args = tuple(list_args)
         #クエリを実行し、結果を取得
         rows = C020_DBUtil.executeSQL(json_DBConnectInfo,sql,args)
         #DB接続終了

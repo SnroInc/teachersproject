@@ -10,7 +10,10 @@ urlpatterns = [
     #main
     path('', views.v010_TopPage, name='topPage'),
     path('login/', views.v020_LoginView, name='login'),
+    path('logout/', views.v025_Logout, name='logout'),
     path('shitsmnsaksi/', views.v030_ShitsmnSaksiView, name='shitsmnsaksi'),
+    path('shitsmnShosi/<str:shitsmnID>/kaitRQTork/', views.v060_KaitRQTorkView, name='kaitRQTork'),
+    path('shitsmnShosi/<str:shitsmnID>/kaitRQList/', views.v070_KaitRQListView, name='kaitRQList'),
     path('signUp/', views.v100_SignUpView, name='signUp'),
     path('profile/', views.v110_ProfileView, name='profile'),
     path('myPage/', views.v115_MyPageView, name='myPage'),

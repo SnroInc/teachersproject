@@ -9,6 +9,10 @@
     function action_openNews(url) {
         window.open(url, '_blank');
     }
+    function kaitRQTork() {
+        //”{% url 'TaskManagement:detail_task' task.id %}”
+        location.href = "{% url 'teachersapp:kaitRQTork' shitsmnID='Q20211029000000001' %}";
+    }
 </script>
 {% block head %}
 {% load static %}
@@ -23,7 +27,21 @@
 {% block content %}
 hello world
 
-<!-- サンプルコード -->
+
+<!-- 画面検証用コード -->
+<div class="col-md-6">
+    <button type="button" onclick="kaitRQTork();" class="btn btn-success btn-block">回答リクエスト登録</button>
+</div>
+<br>
+<div class="col-md-6">
+    <a href="{% url 'teachersapp:kaitRQTork' 'Q20211029000000001' %}"><button type="button"
+            class="btn btn-success btn-block">回答リクエスト登録</button></a>
+    <a href="{% url 'teachersapp:kaitRQList' 'Q20211029000000001' %}"><button type="button"
+            class="btn btn-success btn-block">回答リクエスト一覧</button></a>
+</div>
+<!-- 画面検証用コード -->
+
+<!-- Bootstrap4サンプルコード -->
 <br>
 <br>
 ■グリッドの概念<br>

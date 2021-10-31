@@ -12,11 +12,8 @@ flg_return==1の時、「path_name」必須
 
 import datetime
 from django.urls import reverse
-from . import S999_SampleService
 from . import (C010_Const,C030_MessageUtil,
-                S006_GetKeibaNews,
                 S160_UserInfoKoshn,
-                S180_UserInfoShutk
 )
 
 def main(request):
@@ -39,7 +36,7 @@ def main(request):
             errflg = "0"
             #更新ボタンの場合
             #サービスのパラメータをリクエストから取得する--------------------------------------
-            userID = "U20211018000000012"
+            userID = request.session['userID']
             userName = request.POST['userName']
             mailAddress = request.POST['mailAddress']
             loginID = request.POST['loginID']

@@ -25,22 +25,22 @@ def main(userID,userName,mailAddress,loginID,loginPass,hyoka,userComment):
         #--(2)クエリとパラメータを定義
         list_args = []
         sql = "update M050_USER set "
-        if not C050_StringUtil.isNullCharacter(userName):
+        if not C050_StringUtil.isNull(userName):
             sql = sql + "USERNAME = %s , "
             list_args.append(userName)
-        if not C050_StringUtil.isNullCharacter(mailAddress):
+        if not C050_StringUtil.isNull(mailAddress):
             sql = sql + "MAIL_ADDRESS = %s , "
             list_args.append(mailAddress)
-        if not C050_StringUtil.isNullCharacter(loginID):
+        if not C050_StringUtil.isNull(loginID):
             sql = sql + "LOGINID = %s , "
             list_args.append(loginID)
-        if not C050_StringUtil.isNullCharacter(loginPass):
+        if not C050_StringUtil.isNull(loginPass):
             sql = sql + "LOGINPASS = %s , "
             list_args.append(loginPass)
-        if not C050_StringUtil.isNullCharacter(hyoka):
+        if not C050_StringUtil.isNull(hyoka):
             sql = sql + "HYOKA = %s , "
             list_args.append(hyoka)
-        if not C050_StringUtil.isNullCharacter(userComment):
+        if not C050_StringUtil.isNull(userComment):
             sql = sql + "USERCOMMENT = %s , "
             list_args.append(userComment)
 
