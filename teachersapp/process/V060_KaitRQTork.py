@@ -10,7 +10,7 @@ flg_return==1の時、「path_name」必須
 
 """
 
-import datetime
+from datetime import datetime
 from django.urls import reverse
 from . import (C010_Const,C030_MessageUtil,
                 S006_GetKeibaNews,
@@ -37,7 +37,7 @@ def main(request,shitsmnID):
             例は、redirect
             """
             errflg = "0"
-            list_seq = request.POST.getlist["kibuJiknInfo"]
+            list_seq = request.POST.getlist("kibuJiknInfo")
             kaitUserComment = request.POST['kaitUserComment']
             kaitUserID = request.session['userID']
 
@@ -64,8 +64,8 @@ def main(request,shitsmnID):
                 #json_kaitRQInfo_S130_S100Kensho = S130_KaitRQShutk.main(str_shitsmnID_S100,int_seq_S100,int_rqSeq_S100)["json_kaitRQInfo"]
                 #-------------------------------------------------------------------------------
             flg_return = "1"
-            #path_name = "'teachersapp:shitsmnDetail' shitsmnID"
-            path_name = 'teachersapp:topPage'
+            #path_name = "C010_Const.APP_NAME_DEFAULT + ':shitsmnDetail' shitsmnID"
+            path_name = C010_Const.APP_NAME_DEFAULT + ':topPage'
 
         else:
             #POST以外の場合
@@ -88,7 +88,7 @@ def main(request,shitsmnID):
             #-------------------------------------------------------------------------------
             #戻り値にセット
             flg_return = "0"
-            template = 'teachersapp/T060_KaitRQTork.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T060_KaitRQTork.html'
             json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context,**{
                                     "json_keibaInfo":json_keibaInfo,

@@ -17,10 +17,14 @@
             {% for kaitRQList in tuple_kaitRQList %}
             <div class="col-sm-6" type="button" onclick="kaitoRQShosi();">
                 <div class="card">
-                    <div class="card-body">
-                        <p class="card-text">第{{ kaitRQList.SEQ }}希望</p>
-                        <h5 class="card-title">{{ kaitRQList.KAIT_USERID }}(本当はユーザ名を出す)</h5>
-                    </div>
+                    <a class="text-decoration-none"
+                        href="{% url 'teachersapp:kaitRQDetail' kaitRQList.SHITSMN_ID kaitRQList.SEQ kaitRQList.RQSEQ %}">
+                        <div class="card-body text-dark">
+                            <p class="card-text">第{{ kaitRQList.SEQ }}希望</p>
+                            <h5 class="card-title">{{ kaitRQList.KAIT_USERID }}(本当はユーザ名を出す)</h5>
+                            PKey:{{ kaitRQList.SHITSMN_ID }},{{ kaitRQList.SEQ }},{{ kaitRQList.RQSEQ }}
+                        </div>
+                    </a>
                 </div>
                 <br>
             </div>

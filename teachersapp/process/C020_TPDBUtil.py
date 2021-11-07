@@ -12,22 +12,23 @@ https://gametech.vatchlog.com/2019/05/07/mysqlclient-utf-8/
 # MySQLdbのインポート
 import MySQLdb
 
+
 def connectDB():
     # データベースへの接続とカーソルの生成
-    #settingsから以ってきたい
+    # settingsから以ってきたい
     connection = MySQLdb.connect(
         host='localhost',
         user='root',
         passwd='K@iyo2021',
         db='TEACHERSDB',
         charset='utf8')
-    #カーソルを辞書型で取得
+    # カーソルを辞書型で取得
     cursor = connection.cursor(MySQLdb.cursors.DictCursor)
-    json_DBConnectInfo = {'con':connection,'cur':cursor}
+    json_DBConnectInfo = {'con': connection, 'cur': cursor}
     return json_DBConnectInfo
 
- 
-def closeDB(connection,errflg):
+
+def closeDB(connection, errflg):
     if errflg == "0":
         # コミット
         connection.commit()

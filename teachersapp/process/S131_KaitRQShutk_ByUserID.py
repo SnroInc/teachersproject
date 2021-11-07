@@ -22,7 +22,7 @@ def main(shitsmnID, int_seq,kaitUserID):
         #DB接続開始、コネクションとカーソルを取得
         json_DBConnectInfo = C020_DBUtil.connectDB()
         #クエリを定義
-        sql = "select * from T120_KAITREQUEST where SHITSMN_ID = %s and SEQ = %s and KAIT_USERID = %s and DELFLG = %s order by RQSEQ DESC;"
+        sql = "select SHITSMN_ID, SEQ, RQSEQ, KAIT_USERID, KAIT_USERCOMMENT, RQYUKJKN, RQYUKKGN, CRTSRV, CRTUSR, UPDDATE, DELFLG from T120_KAITREQUEST where SHITSMN_ID = %s and SEQ = %s and KAIT_USERID = %s and DELFLG = %s order by RQSEQ DESC;"
         #パラメータを定義
         args = (shitsmnID,int_seq,kaitUserID,"0",)
         #クエリを実行し、結果を取得

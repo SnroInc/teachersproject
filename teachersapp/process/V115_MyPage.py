@@ -60,7 +60,7 @@ def main(request):
             #-------------------------------------------------------------------------------
             """
             flg_return = "1"
-            path_name = 'teachersapp:myPage'
+            path_name = C010_Const.APP_NAME_DEFAULT + ':myPage'
         else:
             #POST以外の場合
             """
@@ -78,7 +78,6 @@ def main(request):
             #--S180-------------------------------------------------------------------------
             #サービス呼び出し
             json_S180 = S180_UserInfoShutk.main(userID)
-            print("json_S180:",json_S180)
             #個々の値を取得
             flg_S180 = json_S180["json_CommonInfo"]["errflg"]
             list_msgInfo_S180 = json_S180["json_CommonInfo"]["list_msgInfo"]
@@ -93,7 +92,7 @@ def main(request):
             
             #戻り値にセット
             flg_return = "0"
-            template = 'teachersapp/T110_Profile.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T110_Profile.html'
             json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context,**{
                                     "userInfo":json_userInfo_S180,
