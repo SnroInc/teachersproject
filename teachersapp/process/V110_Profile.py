@@ -60,7 +60,7 @@ def main(request):
             #-------------------------------------------------------------------------------
             """
             flg_return = "1"
-            path_name = 'teachersapp:myPage'
+            path_name = C010_Const.APP_NAME_DEFAULT + ':myPage'
         else:
             #POST以外の場合
             """
@@ -90,7 +90,7 @@ def main(request):
             
             #戻り値にセット
             flg_return = "0"
-            template = 'teachersapp/T110_Profile.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T110_Profile.html'
             json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context,**{
                                     "userInfo":json_userInfo_S180,

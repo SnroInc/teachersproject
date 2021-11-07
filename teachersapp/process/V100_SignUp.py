@@ -112,7 +112,7 @@ def main(request):
             #チェックNGの場合、処理を終了して再描画
             if errflg == "1":
                 flg_return = "0"
-                template = 'teachersapp/T100_SignUp.html'
+                template = C010_Const.APP_NAME_DEFAULT + '/T100_SignUp.html'
                 context = {**context,**{
                                         "userName":userName,
                                         "mailAddress":mailAddress,
@@ -176,7 +176,7 @@ def main(request):
             """
             #戻り値にセット
             flg_return = "0"
-            template = 'teachersapp/T100_SignUp.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T100_SignUp.html'
             #list_newsInfo = S006_GetKeibaNews.main(10)
             context = {**context,**{
                                     #"list_newsInfo":list_newsInfo,

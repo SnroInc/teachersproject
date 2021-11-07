@@ -12,6 +12,17 @@ https://gametech.vatchlog.com/2019/05/07/mysqlclient-utf-8/
 """
 # MySQLdbのインポート
 import MySQLdb
+from django.conf import settings
+
+#Djangoのsettingsから情報をとってくる
+Dict_DBInfo = settings.DATABASES["TEACHERSDB"]
+ENGINE = Dict_DBInfo["ENGINE"]
+DBNAME = Dict_DBInfo["NAME"]
+PASSWORD = Dict_DBInfo["PASSWORD"]
+USER = Dict_DBInfo["USER"]
+HOST = Dict_DBInfo["HOST"]
+PORT = Dict_DBInfo["PORT"]
+CHARSET = Dict_DBInfo["CHARSET"]
 
 #MSQLDBエラー
 MySQLDBException = MySQLdb.MySQLError
@@ -20,11 +31,11 @@ def connectDB():
     # データベースへの接続とカーソルの生成
     #settingsから以ってきたい
     connection = MySQLdb.connect(
-        host='localhost',
-        user='root',
-        passwd='K@iyo2021',
-        db='TEACHERSDB',
-        charset='utf8')
+        host=HOST,
+        user=USER,
+        passwd=PASSWORD,
+        db=DBNAME,
+        charset=CHARSET)
     #カーソルを辞書型で取得
     cursor = connection.cursor(MySQLdb.cursors.DictCursor)
     json_DBConnectInfo = {'con':connection,'cur':cursor}

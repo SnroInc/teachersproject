@@ -339,7 +339,7 @@ def main(request):
                             + int(flg_S900) \
                             + int(flg_S060) \
                             )
-            template = 'teachersapp/T999_Sample.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T999_Sample.html'
             context = {**context,**{"list_shitsmnIchirn":tuple_shitsmnIchirn_S999,
                                     "json_shitsmnInfo_S050_S020Kensho": json_shitsmnInfo_S050_S020Kensho,
                                     "json_shitsmnInfo_S050_S030Kensho": json_shitsmnInfo_S050_S030Kensho,

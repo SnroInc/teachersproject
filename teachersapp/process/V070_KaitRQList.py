@@ -34,7 +34,7 @@ def main(request,shitsmnID):
             例は、redirect
             """
             flg_return = "1"
-            path_name = 'teachersapp:topPage'
+            path_name = C010_Const.APP_NAME_DEFAULT + ':topPage'
         else:
             #POST以外の場合
             """
@@ -59,7 +59,7 @@ def main(request,shitsmnID):
 
             #戻り値にセット
             flg_return = "0"
-            template = 'teachersapp/T070_KaitRQList.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T070_KaitRQList.html'
             context = {**context,**{
                                     "tuple_kaitRQList":tuple_kaitRQList_140,
                                     "json_keibaInfo":json_keibaInfo,

@@ -1,0 +1,109 @@
+{% extends "teachersapp/T000_Base.html" %}
+
+{% block head %}
+<script>
+    function kaitRQRecept() {
+        document.getElementById('form').action = "";
+        document.getElementById('form').submit();
+    }
+    function back() {
+        document.getElementById('form').submit();
+    }
+</script>
+{% endblock head %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row gx-3">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-8">
+            <div class="p-3 mb-2 bg-light text-dark">
+                <br>
+                <h2>回答リクエスト詳細</h2>
+                <br>
+                <!--仮エリア----------------------------------------------------------------->
+                <label>回答リクエストユーザ：{{json_kaitRQInfo_S130.KAIT_USERID}}（本当はユーザ名を表示する）</label>
+                <br>
+                <br>
+                <label>回答可能時間：{{json_kaitRQInfo_S130.SHITSMN_ID}}と{{json_kaitRQInfo_S130.SEQ}}と{{json_kaitRQInfo_S130.RQSEQ}}からもとまる（本当は開始時刻と時間を表示する）</label>
+                <br>
+                <br>
+                <label>回答者コメント：</label>
+                <br>
+                <textarea class="form-control" id="kaitUserComment" name="kaitUserComment" rows="5"
+                value="{{json_kaitRQInfo_S130.KAIT_USERCOMMENT}}" disabled></textarea>
+                <br>
+                <br>
+                <!-- いらないかも？ ------------------------------------------>
+                <label>リクエスト有効期限：{{json_kaitRQInfo_S130.RQYUKKGN}}</label>
+                <br>
+                <br>
+                <!-- いらないかも？ ------------------------------------------>
+                <!--仮エリア----------------------------------------------------------------->
+                <form id='form' name='form' method="post">{% csrf_token %}
+                    <div class="row justify-content-start">
+                        <div class="col-md-6">
+                            <button type="button" onclick="kaitRQRecept();"
+                                class="btn btn-success btn-block">この人に教えてもらう</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" onclick="back();" class="btn btn-muted btn-block">戻る</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                        <div class="col-md-6">
+                            <button type="button" onclick="kaitRQRecept();"
+                                class="btn btn-success btn-block">回答リクエスト取り消し</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" onclick="back();" class="btn btn-muted btn-block">戻る</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- 右広告エリア ------------------------------------------------------------------------------->
+        <div class="col-md-3">
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <h6>★今日の一押し★</h6>
+                <div class="video">
+                    <!-- <label>どこまでいってもにげてやる</label> -->
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UKESIh9fEfA"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <br>
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <div class="">
+                    <h5 class="tp_bg_newsAreaTitle">★新着ニュース</h5>
+                    {% for json_newsInfo in json_keibaInfo.list_news_Info_gokum %}
+
+                    <a class="text-decoration-none text-dark" href="{{json_newsInfo.newsURL}}" target="_blank">
+                        <div class="tp_bg_newsArea">
+                            <p>{{json_newsInfo.newsTitle}}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
+        </div>
+        <!-- 右広告エリア ------------------------------------------------------------------------------->
+    </div>
+    <br>
+</div>
+
+
+
+
+
+{% endblock content %}

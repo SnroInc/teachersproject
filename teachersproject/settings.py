@@ -81,7 +81,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'TEACHERSDB': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'TEACHERSDB', #　作成したデータベース名
+        'PASSWORD': 'K@iyo2021',
+        'USER': 'root', # ログインユーザー名
+        'HOST': 'localhost',
+        'PORT': '',
+        'CHARSET':'utf8',
+    },
 }
 
 
