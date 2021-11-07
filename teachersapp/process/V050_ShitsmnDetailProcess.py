@@ -15,11 +15,12 @@ from django.urls import reverse
 from . import S999_SampleService
 from . import (C010_Const, C030_MessageUtil,
                S006_GetKeibaNews,
-               S020_ShitsmnInfoTork
+               S020_ShitsmnInfoTork,
+               S050_ShitsmnInfoShutk
                )
 
 
-def main(request):
+def main(request,shitsmnID):
     # --View共通----------------------------------------------
     # 戻り値用の変数宣言
     flg_return = ""
@@ -37,38 +38,6 @@ def main(request):
             例は、redirect
             """
             errflg = "0"
-            # サービスの引数をリクエストから取得する
-            shitsmnTitle = request.POST['shitsmnTitle']
-            shitsmnNaiyo = request.POST['shitsmnNaiyo']
-            hashTags = request.POST['hashTags']
-            list_hashTag = hashTags.replace(" ", "").split("#")
-            # --S020-------------------------------------------------------------------------
-            # サービス呼び出し
-            #shitsmnTitle = "菊花賞の勝ち馬を教えてください"
-            #shitsmnNaiyo = "3000mの3歳馬なので分かりません。"
-            shitsmnUserID = "SYSTEM000000000000"
-            #list_hashTag = ["菊花賞","福永祐一"]
-            # 会議終了時間計算
-            eTime1 = datetime.datetime.strptime(
-                request.POST['sTime1'], '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=int(request.POST['duration1']))
-            eTime2 = datetime.datetime.strptime(
-                request.POST['sTime2'], '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=int(request.POST['duration2']))
-            eTime3 = datetime.datetime.strptime(
-                request.POST['sTime3'], '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=int(request.POST['duration3']))
-            list_kaigikibujikn = [{"KAISHNCHJ": request.POST['sTime1'], "SHURYNCHJ":eTime1, "KAIGIJIKN":request.POST['duration1']},
-                                  {"KAISHNCHJ": request.POST['sTime2'], "SHURYNCHJ":eTime2, "KAIGIJIKN":request.POST['duration2']},
-                                  {"KAISHNCHJ": request.POST['sTime3'], "SHURYNCHJ":eTime3, "KAIGIJIKN":request.POST['duration3']}
-                                  ]
-            json_S020 = S020_ShitsmnInfoTork.main(
-                shitsmnTitle, shitsmnNaiyo, shitsmnUserID, list_hashTag, list_kaigikibujikn)
-            # 個々の値を取得
-            flg_S020 = json_S020["json_CommonInfo"]["errflg"]
-            list_msgInfo_S020 = json_S020["json_CommonInfo"]["list_msgInfo"]
-            str_shitsmnID_S020 = json_S020["str_shitsmnID"]
-            # メッセージ格納
-            C030_MessageUtil.setMessageList(request, list_msgInfo_S020)
-            # 検証用
-            #json_shitsmnInfo_S050_S020Kensho = S050_ShitsmnInfoShutk.main(str_shitsmnID_S020)["json_shitsmnInfo"]
             # -------------------------------------------------------------------------------
             flg_return = "1"
             path_name = 'teachersapp:topPage'
@@ -93,11 +62,21 @@ def main(request):
             C030_MessageUtil.setMessageList(request,list_msgInfo_S060)
             #-------------------------------------------------------------------------------
             """
+            #サービス呼び出し
+            json_S050 = S050_ShitsmnInfoShutk.main(shitsmnID)
+            #個々の値を取得
+            flg_S050 = json_S050["json_CommonInfo"]["errflg"]
+            list_msgInfo_S050 = json_S050["json_CommonInfo"]["list_msgInfo"]
+            json_shitsmnDetail = json_S050["json_shitsmnInfo"]
+            #メッセージ格納
+            C030_MessageUtil.setMessageList(request,list_msgInfo_S050)
+
             # 戻り値にセット
             flg_return = "0"
             template = 'teachersapp/T050_ShitsmnDetail.html'
             json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context, **{
+                "json_shitsmnDetail":json_shitsmnDetail,
                 "json_keibaInfo": json_keibaInfo,
             }
             }

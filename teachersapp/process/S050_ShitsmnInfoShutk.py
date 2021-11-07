@@ -11,7 +11,7 @@ from . import C020_DBUtil,C030_MessageUtil
 
 SERVICE_ID = "S050"
 
-def main(shitsmn_id):
+def main(shitsmnID):
     #--戻り値用の変数宣言------------------------------------------------------------------------------
     errflg = "0"
     list_msgInfo = []
@@ -24,7 +24,7 @@ def main(shitsmn_id):
         #クエリを定義
         sql = "select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,KAIGIID,CRTDATE,UPDDATE from t100_shitsmn where SHITSMN_ID = %s  and DELFLG = '0' ;"
         #パラメータを定義
-        args = (shitsmn_id,)
+        args = (shitsmnID,)
         #クエリを実行し、結果を取得
         rows = C020_DBUtil.executeSQL(json_DBConnectInfo,sql,args)
         #DB接続終了
