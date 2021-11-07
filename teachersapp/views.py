@@ -114,7 +114,7 @@ def v030_ShitsmnSaksiView(request):
 def v050_ShitsmnDetailView(request,shitsmnID):
     try:
         #ビュープロセスクラスを呼び出し
-        json_view = V050_ShitsmnDetailProcess.main(request)
+        json_view = V050_ShitsmnDetailProcess.main(request,shitsmnID)
         #「render」か「redirect」かを判断
         flg_return = json_view["flg_return"]
         if flg_return == "0":

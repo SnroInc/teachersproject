@@ -33,7 +33,6 @@
                     <a class="text-decoration-none" href="{% url 'teachersapp:shitsmnDetail' shitsmn_shinchk.SHITSMN_ID %}">
                         <div class="card" type="button">
                             <div class="card-body text-dark">
-                                {{ shitsmn_shinchk.SHITSMN_ID }}<br>
                                 <h5 class="card-title">{{ shitsmn_shinchk.SHITSMN_TITLE }}</h5>
                                 <p class="card-text">{{ shitsmn_shinchk.SHITSMN_NAIYO }}</p>
                             </div>
@@ -49,8 +48,7 @@
                 <div class="p-3 mb-2 bg-light text-dark">
                     <h6>★今日の一押し★</h6>
                     <a href="{{json_keibaInfo.json_newsVideoKametanInfo.newsVideo_kametani_url}}" target="_blank">
-                        <img class="tp_thumbnailImg"
-                            src="{{json_keibaInfo.json_newsVideoKametanInfo.newsVideo_kametani_imgSrc}}">
+                        <img class="tp_thumbnailImg" src="{{json_keibaInfo.json_newsVideoKametanInfo.newsVideo_kametani_imgSrc}}">
                     </a>
                 </div>
                 <!-- 一押し動画エリア ------------------------------------------------------------------------------->
