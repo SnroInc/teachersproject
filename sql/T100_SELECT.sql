@@ -82,3 +82,31 @@ select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,KAIGIID,CRTDATE,UPD
     ) 
  t100_sub where t100_main.SHITSMN_ID =  t100_sub.SHITSMN_ID 
  )
+ 
+#========================================================
+select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,KAIGIID,CRTDATE,UPDDATE 
+	from t100_shitsmn t100_main 
+    where  t100_main.SHITSMN_ID 
+		in 	(
+				select MAX(t100.SHITSMN_ID) 
+				from	t100_shitsmn t100
+				left outer join t101_shitsmnhashtag t101
+					on   t100.SHITSMN_ID = t101.SHITSMN_ID
+-- 				left outer join t102_kaigikbujkn t102
+-- 					on t100.SHITSMN_ID = t102.SHITSMN_ID
+				left outer join t120_kaitrequest t120
+					on t100.SHITSMN_ID = t120.SHITSMN_ID
+-- 						AND t102.SEQ = t120.SEQ 
+			where "0" = "0"
+				AND ((t100.SHITSMN_TITLE like "%マカヒキ%") or (t100.SHITSMN_NAIYO like "%マカヒキ%"))
+				#AND t100.SHITSMN_USERID = "tsunesanbk"
+				#AND t101.HASHTAG in ("競馬","マカヒキ")
+-- 				AND t102.KAISHNCHJ >= "2021-10-15 21:00:00"
+-- 				AND t102.KAISHNCHJ <= "2021-10-17 21:00:00"
+ 				AND (
+						(t102.KAISHNCHJ01 >= "2021-10-15 21:00:00" AND t102.KAISHNCHJ01 <= "2021-12-17 21:00:00") OR (t102.KAISHNCHJ02 >= "2021-12-15 21:00:00" AND t102.KAISHNCHJ02 <= "2021-12-17 21:00:00") OR (t102.KAISHNCHJ03 >= "2021-10-15 21:00:00" AND t102.KAISHNCHJ03 <= "2021-10-17 21:00:00")
+					)
+				#AND t120.KAIT_USERID = "tsunesanBK"
+			group by t100.SHITSMN_ID
+			)
+;

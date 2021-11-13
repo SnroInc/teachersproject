@@ -13,8 +13,7 @@ from . import S905_SaibnMstShtk
 SERVICE_ID = "S020"
 
 
-def main(shitsmnTitle, shitsmnNaiyo, shitsmnUserID, list_hashTag,
-         strDate01, endDate01, kaigiTime01, strDate02, endDate02, kaigiTime02, strDate03, endDate03, kaigiTime03, kaigiID):
+def main(shitsmnTitle, shitsmnNaiyo, shitsmnUserID, list_hashTag, list_kaigikibujikn):
     # --戻り値用の変数宣言------------------------------------------------------------------------------
     errflg = "0"
     list_msgInfo = []
@@ -31,10 +30,9 @@ def main(shitsmnTitle, shitsmnNaiyo, shitsmnUserID, list_hashTag,
         json_DBConnectInfo = C020_DBUtil.connectDB()
         # --(2)クエリとパラメータを定義
         # T100
-        sql_T100 = "INSERT INTO T100_SHITSMN VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,\
-            %s,%s,current_timestamp(6),%s,%s,current_timestamp(6),%s);"
-        args_T100 = (newID_S100, shitsmnTitle, shitsmnNaiyo, shitsmnUserID, strDate01, endDate01, kaigiTime01, strDate02,
-                     endDate02, kaigiTime02, strDate03, endDate03, kaigiTime03, kaigiID, SERVICE_ID, shitsmnUserID, SERVICE_ID, shitsmnUserID, "0")
+        sql_T100 = "INSERT INTO T100_SHITSMN VALUES (%s,%s,%s,%s,%s,%s,%s,current_timestamp(6),%s,%s,current_timestamp(6),%s);"
+        args_T100 = (newID_S100, shitsmnTitle, shitsmnNaiyo, shitsmnUserID,
+                     None, SERVICE_ID, shitsmnUserID, SERVICE_ID, shitsmnUserID, "0")
         # T101
         sql_T101 = "INSERT INTO T101_SHITSMNHASHTAG VALUES (%s,%s,%s,%s,current_timestamp(6),%s,%s,current_timestamp(6),%s);"
         list_args_T101 = []
@@ -42,14 +40,27 @@ def main(shitsmnTitle, shitsmnNaiyo, shitsmnUserID, list_hashTag,
             args_T101 = (newID_S100, str_hashTag, SERVICE_ID,
                          shitsmnUserID, SERVICE_ID, shitsmnUserID, "0")
             list_args_T101.append(args_T101)
-
+        # T102
+        sql_T102 = "INSERT INTO T102_KAIGIKBUJKN VALUES (%s,%s,%s,%s,%s,%s,%s,current_timestamp(6),%s,%s,current_timestamp(6),%s);"
+        list_args_T102 = []
+        seq_T102 = 0
+        for json_kaigikibujiknInfo in list_kaigikibujikn:
+            seq_T102 += 1
+            kaishNchj = json_kaigikibujiknInfo["KAISHNCHJ"]
+            ShuryNchj = json_kaigikibujiknInfo["SHURYNCHJ"]
+            kaigiJikn = json_kaigikibujiknInfo["KAIGIJIKN"]
+            args_T102 = (newID_S100, seq_T102, kaishNchj, ShuryNchj, kaigiJikn,
+                         SERVICE_ID, shitsmnUserID, SERVICE_ID, shitsmnUserID, "0")
+            list_args_T102.append(args_T102)
         # クエリを実行し、結果を取得
         # T100
         C020_DBUtil.executeSQL(json_DBConnectInfo, sql_T100, args_T100)
         # T101 (ちょっと無駄な処理。非機能の改善可能。)
         for args_T101 in list_args_T101:
             C020_DBUtil.executeSQL(json_DBConnectInfo, sql_T101, args_T101)
-
+        # T102
+        for args_T102 in list_args_T102:
+            C020_DBUtil.executeSQL(json_DBConnectInfo, sql_T102, args_T102)
         # DB接続終了
         C020_DBUtil.closeDB(json_DBConnectInfo, errflg)
         # --------------------------------------------------------------------------------------------
