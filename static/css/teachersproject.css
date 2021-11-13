@@ -94,6 +94,19 @@
   background-blend-mode:lighten;
 }
 
+.mgr-50 {
+  margin-right : 50px;
+}
+
+.test {
+  display: block
+}
+
+
+/* .detailTitle { */
+  /* text-align: center; */
+/* } */
+
 /** 競馬ニュースcss ---------------------------------------------------**/
 .tp_bg_newsArea{
   background-image: url("/static/images/jra.png");

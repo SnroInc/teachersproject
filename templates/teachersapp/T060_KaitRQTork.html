@@ -3,7 +3,7 @@
 {% block head %}
 <script>
     function kaitRQTork() {
-        document.getElementById('form').action = "{% url 'teachersapp:kaitRQTork' shitsmnID='Q20211113000000002' %}";
+        document.getElementById('form').action = "{% url 'teachersapp:kaitRQTork' shitsmnInfo.SHITSMN_ID %}";
         document.getElementById('form').submit();
     }
 </script>
