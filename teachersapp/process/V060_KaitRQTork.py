@@ -52,6 +52,7 @@ def main(request,shitsmnID):
                 str_rqYukKign = '3000-12-31 00:00:00'
                 datetime_rqYukKign = datetime.strptime(str_rqYukKign, '%Y-%m-%d %H:%M:%S')
                 json_S100 = S100_KaitRQTork.main(shitsmnID,int_seq,kaitUserID,kaitUserComment,rqYukJikn,datetime_rqYukKign)
+                print(json_S100)
                 #個々の値を取得
                 #flg_S100 = json_S100["json_CommonInfo"]["errflg"]
                 list_msgInfo_S100 = json_S100["json_CommonInfo"]["list_msgInfo"]
