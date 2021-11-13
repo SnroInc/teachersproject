@@ -22,7 +22,7 @@ def main(shitsmnID):
         #DB接続開始、コネクションとカーソルを取得
         json_DBConnectInfo = C020_DBUtil.connectDB()
         #クエリを定義
-        sql = "select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,KAIGIID,CRTDATE,UPDDATE from t100_shitsmn where SHITSMN_ID = %s  and DELFLG = '0' ;"
+        sql = "select t100_shitsmn.SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,KAIGIID,t100_shitsmn.CRTDATE,t100_shitsmn.UPDDATE,SEQ,KAISHNCHJ,SHURYNCHJ,KAIGIJIKN from t100_shitsmn inner join t102_kaigikbujkn on t100_shitsmn.SHITSMN_ID = t102_kaigikbujkn.SHITSMN_ID where t100_shitsmn.SHITSMN_ID = %s  and t100_shitsmn.DELFLG = '0' ;"
         #パラメータを定義
         args = (shitsmnID,)
         #クエリを実行し、結果を取得
