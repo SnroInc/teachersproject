@@ -36,37 +36,6 @@ def main(shitsmnID, shitsmnTitle, shitsmnNaiyo, shitsmnUserID, kaigiID, list_has
         if not C050_StringUtil.isNull(shitsmnUserID):
             sql_T100 = sql_T100 + "SHITSMN_USERID = %s, "
             list_args_T100.append(shitsmnUserID)
-        # 希望時間情報1
-        if not C050_StringUtil.isNull(strDate01):
-            sql_T100 = sql_T100 + "KAISHNCHJ01 = %s, "
-            list_args_T100.append(strDate01)
-        if not C050_StringUtil.isNull(endDate01):
-            sql_T100 = sql_T100 + "SHURYNCHJ01 = %s, "
-            list_args_T100.append(endDate01)
-        if not C050_StringUtil.isNull(kaigiTime01):
-            sql_T100 = sql_T100 + "KAIGIJIKN01 = %s, "
-            list_args_T100.append(kaigiTime01)
-        # 希望時間情報2
-        if not C050_StringUtil.isNull(strDate02):
-            sql_T100 = sql_T100 + "KAISHNCHJ02 = %s, "
-            list_args_T100.append(strDate02)
-        if not C050_StringUtil.isNull(endDate02):
-            sql_T100 = sql_T100 + "SHURYNCHJ02 = %s, "
-            list_args_T100.append(endDate02)
-        if not C050_StringUtil.isNull(kaigiTime02):
-            sql_T100 = sql_T100 + "KAIGIJIKN02 = %s, "
-            list_args_T100.append(kaigiTime02)
-        # 希望時間情報3
-        if not C050_StringUtil.isNull(strDate03):
-            sql_T100 = sql_T100 + "KAISHNCHJ03 = %s, "
-            list_args_T100.append(strDate03)
-        if not C050_StringUtil.isNull(endDate03):
-            sql_T100 = sql_T100 + "SHURYNCHJ03 = %s, "
-            list_args_T100.append(endDate03)
-        if not C050_StringUtil.isNull(kaigiTime03):
-            sql_T100 = sql_T100 + "KAIGIJIKN03 = %s, "
-            list_args_T100.append(kaigiTime03)
-        # 会議時間ID
         if not C050_StringUtil.isNull(kaigiID):
             sql_T100 = sql_T100 + "KAIGIID = %s, "
             list_args_T100.append(kaigiID)
@@ -94,6 +63,23 @@ def main(shitsmnID, shitsmnTitle, shitsmnNaiyo, shitsmnUserID, kaigiID, list_has
                          updUserID, SERVICE_ID, updUserID, "0",)
             list_args_T101_ins.append(args_T101)
 
+        # T102(全削除全登録の、DELINによる洗い替え)
+        # 削除用クエリとパラメータを定義
+        sql_T102_del = "delete from T102_KAIGIKBUJKN where SHITSMN_ID = %s ;"
+        args_T102_del = (shitsmnID,)
+        # 登録用クエリとパラメータを定義
+        sql_T102_ins = "INSERT INTO T102_KAIGIKBUJKN VALUES (%s,%s,%s,%s,%s,%s,%s,current_timestamp(6),%s,%s,current_timestamp(6),%s);"
+        list_args_T102_ins = []
+        seq_T102 = 0
+        for json_kaigikibujiknInfo in list_kaigikibujikn:
+            seq_T102 += 1
+            kaishNchj = json_kaigikibujiknInfo["KAISHNCHJ"]
+            ShuryNchj = json_kaigikibujiknInfo["SHURYNCHJ"]
+            kaigiJikn = json_kaigikibujiknInfo["KAIGIJIKN"]
+            args_T102_ins = (shitsmnID, seq_T102, kaishNchj, ShuryNchj,
+                             kaigiJikn, SERVICE_ID, updUserID, SERVICE_ID, updUserID, "0",)
+            list_args_T102_ins.append(args_T102_ins)
+
         # クエリを実行し、結果を取得
         # T100
         C020_DBUtil.executeSQL(json_DBConnectInfo, sql_T100, args_T100)
@@ -102,6 +88,11 @@ def main(shitsmnID, shitsmnTitle, shitsmnNaiyo, shitsmnUserID, kaigiID, list_has
         for args_T101_ins in list_args_T101_ins:
             C020_DBUtil.executeSQL(
                 json_DBConnectInfo, sql_T101_ins, args_T101_ins)
+        # T102
+        C020_DBUtil.executeSQL(json_DBConnectInfo, sql_T102_del, args_T102_del)
+        for args_T102_ins in list_args_T102_ins:
+            C020_DBUtil.executeSQL(
+                json_DBConnectInfo, sql_T102_ins, args_T102_ins)
         # DB接続終了
         C020_DBUtil.closeDB(json_DBConnectInfo, errflg)
         # --------------------------------------------------------------------------------------------

@@ -18,7 +18,6 @@ from . import (C010_Const, C030_MessageUtil,
                S020_ShitsmnInfoTork
                )
 
-
 def main(request):
     # --View共通----------------------------------------------
     # 戻り値用の変数宣言
@@ -55,14 +54,12 @@ def main(request):
                 request.POST['sTime2'], '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=int(request.POST['duration2']))
             eTime3 = datetime.datetime.strptime(
                 request.POST['sTime3'], '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=int(request.POST['duration3']))
-            strDate01 = request.POST['sTime1']
-            kaigiTime01 = request.POST['duration1']
-            strDate02 = request.POST['sTime2']
-            kaigiTime02 = request.POST['duration2']
-            strDate03 = request.POST['sTime3']
-            kaigiTime03 = request.POST['duration3']
+            list_kaigikibujikn = [{"KAISHNCHJ": request.POST['sTime1'], "SHURYNCHJ":eTime1, "KAIGIJIKN":request.POST['duration1']},
+                                  {"KAISHNCHJ": request.POST['sTime2'], "SHURYNCHJ":eTime2, "KAIGIJIKN":request.POST['duration2']},
+                                  {"KAISHNCHJ": request.POST['sTime3'], "SHURYNCHJ":eTime3, "KAIGIJIKN":request.POST['duration3']}
+                                  ]
             json_S020 = S020_ShitsmnInfoTork.main(
-                shitsmnTitle, shitsmnNaiyo, shitsmnUserID, list_hashTag, strDate01, eTime1, kaigiTime01, strDate02, eTime2, kaigiTime02, strDate03, eTime3, kaigiTime03, None)
+                shitsmnTitle, shitsmnNaiyo, shitsmnUserID, list_hashTag, list_kaigikibujikn)
             # 個々の値を取得
             flg_S020 = json_S020["json_CommonInfo"]["errflg"]
             list_msgInfo_S020 = json_S020["json_CommonInfo"]["list_msgInfo"]
