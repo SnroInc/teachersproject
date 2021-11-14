@@ -3,7 +3,7 @@
 {% block head %}
 <script>
     function kaitRQRecept() {
-        document.getElementById('form').action = "";
+        document.getElementById('form').action = 'teachersapp:matching';
         document.getElementById('form').submit();
     }
     function back() {
@@ -34,7 +34,7 @@
                 <label>回答者コメント：</label>
                 <br>
                 <textarea class="form-control" id="kaitUserComment" name="kaitUserComment" rows="5"
-                value="{{json_kaitRQInfo_S130.KAIT_USERCOMMENT}}" disabled></textarea>
+                    value="{{json_kaitRQInfo_S130.KAIT_USERCOMMENT}}" disabled></textarea>
                 <br>
                 <br>
                 <!-- いらないかも？ ------------------------------------------>

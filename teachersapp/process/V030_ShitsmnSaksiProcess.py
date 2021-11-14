@@ -46,7 +46,7 @@ def main(request):
             # サービス呼び出し
             #shitsmnTitle = "菊花賞の勝ち馬を教えてください"
             #shitsmnNaiyo = "3000mの3歳馬なので分かりません。"
-            shitsmnUserID = "SYSTEM000000000000"
+            shitsmnUserID = request.session['userID']
             #list_hashTag = ["菊花賞","福永祐一"]
             # 会議終了時間計算
             eTime1 = datetime.datetime.strptime(
@@ -73,7 +73,7 @@ def main(request):
             #json_shitsmnInfo_S050_S020Kensho = S050_ShitsmnInfoShutk.main(str_shitsmnID_S020)["json_shitsmnInfo"]
             # -------------------------------------------------------------------------------
             flg_return = "1"
-            path_name = 'teachersapp:topPage'
+            path_name = C010_Const.APP_NAME_DEFAULT + ':topPage'
         else:
             # POST以外の場合
             """
@@ -97,7 +97,7 @@ def main(request):
             """
             # 戻り値にセット
             flg_return = "0"
-            template = 'teachersapp/T030_ShitsmnSaksi.html'
+            ttemplate = C010_Const.APP_NAME_DEFAULT + '/T030_ShitsmnSaksi.html'
             json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context, **{
                 "json_keibaInfo": json_keibaInfo,
