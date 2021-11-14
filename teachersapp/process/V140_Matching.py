@@ -115,15 +115,14 @@ def main(request):
                 kaigiTime = json_S050['KAIGIJIKN03']
             # --S240-------------------------------------------------------------------------
             # サービス呼び出し
-            json_S185 = S240_CreateKaigi.main(
+            json_S240 = S240_CreateKaigi.main(
                 kaigiPath, shitsmnUserID, kaitUserID, shitsmnID, int_seq, strDateTime, endDateTime, kaigiTime, loginUserID)
             # 個々の値を取得
-            #flg_S185 = json_S185["json_CommonInfo"]["errflg"]
-            list_msgInfo_S185 = json_S185["json_CommonInfo"]["list_msgInfo"]
-            str_userID_S185 = json_S185["str_userID"]
-            str_userName_S185 = json_S185["str_userName"]
+            #flg_S240 = json_S240["json_CommonInfo"]["errflg"]
+            list_msgInfo_S240 = json_S240["json_CommonInfo"]["list_msgInfo"]
+            #str_kaigiID_S240 = json_S240["str_kaigiID"]
             # メッセージ格納
-            C030_MessageUtil.setMessageList(request, list_msgInfo_S185)
+            C030_MessageUtil.setMessageList(request, list_msgInfo_S240)
             # -------------------------------------------------------------------------------
             flg_return = "1"
             path_name = C010_Const.PATH_NAME_SUCCESS
