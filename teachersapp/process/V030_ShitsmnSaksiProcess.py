@@ -46,7 +46,7 @@ def main(request):
             # サービス呼び出し
             #shitsmnTitle = "菊花賞の勝ち馬を教えてください"
             #shitsmnNaiyo = "3000mの3歳馬なので分かりません。"
-            shitsmnUserID = "SYSTEM000000000000"
+            shitsmnUserID = request.session['userID']
             #list_hashTag = ["菊花賞","福永祐一"]
             # 会議終了時間計算
             eTime1 = datetime.datetime.strptime(
