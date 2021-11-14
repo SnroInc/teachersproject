@@ -45,32 +45,35 @@
                             <span class="mgr-50">{{ json_shitsmnDetail.KAISHNCHJ02 }}</span>
                             <span class="mgr-50">から</span>
                             {{ json_shitsmnDetail.KAIGIJIKN02 }}分
-                            <p class="kaigiTime">
-                                <span class="mgr-50">第三希望</span>
-                                <span class="mgr-50">{{ json_shitsmnDetail.KAISHNCHJ03 }}</span>
-                                <span class="mgr-50">から</span>
-                                {{ json_shitsmnDetail.KAIGIJIKN03 }}分
-                            </p>
+                          
+                        <p class="kaigiTime">
+                            <span class="mgr-50">第三希望</span>
+                            <span class="mgr-50">{{ json_shitsmnDetail.KAISHNCHJ03 }}</span>
+                            <span class="mgr-50">から</span>
+                            {{ json_shitsmnDetail.KAIGIJIKN03 }}分
+                        </p>
                     </div>
                 </div>
-                <br> 
+                <br>
                 {% comment %} ログイン有無でリンク先を変更 {% endcomment %}
                 {% if request.session.userID %}
-                    <a href="{% url 'teachersapp:kaitRQTork' json_shitsmnDetail.SHITSMN_ID %}" class="btn btn-success btn-block">回答リクエスト</a>
+                <a href="{% url 'teachersapp:kaitRQTork' json_shitsmnDetail.SHITSMN_ID %}"
+                    class="btn btn-success btn-block">回答リクエスト</a>
                 {% else %}
-                    <a href="{% url 'teachersapp:login' %}" class="btn btn-success btn-block">回答リクエスト</a>
+                <a href="{% url 'teachersapp:login' %}" class="btn btn-success btn-block">回答リクエスト</a>
                 {% endif %}
                 {% comment %} 質問者とマッチングしたユーザのみ会議を開始ボタンを表示。追加ロジック必要。 {% endcomment %}
                 {% if request.session.userID == json_shitsmnDetail.SHITSMN_USERID %}
-                    <a href="{% url 'teachersapp:topPage' %}" class="btn btn-success btn-block">会議を開始</a>
+                <a href="{% url 'teachersapp:topPage' %}" class="btn btn-success btn-block">会議を開始</a>
                 {% endif %}
                 {% comment %} 質問者のみに回答リクエスト一覧ボタンを表示 {% endcomment %}
                 {% if request.session.userID == json_shitsmnDetail.SHITSMN_USERID %}
-                    <a href="{% url 'teachersapp:kaitRQList' json_shitsmnDetail.SHITSMN_ID %}" class="btn btn-success btn-block">回答リクエスト一覧</a>
+                <a href="{% url 'teachersapp:kaitRQList' json_shitsmnDetail.SHITSMN_ID %}"
+                    class="btn btn-success btn-block">回答リクエスト一覧</a>
                 {% endif %}
                 {% comment %} 質問者のみに質問を取り下げるボタンを表示 {% endcomment %}
                 {% if request.session.userID == json_shitsmnDetail.SHITSMN_USERID %}
-                    <a href="{% url 'teachersapp:topPage' %}" class="btn btn-muted btn-block">質問を取り下げる</a>
+                <a href="{% url 'teachersapp:topPage' %}" class="btn btn-muted btn-block">質問を取り下げる</a>
                 {% endif %}
             </div>
         </div>
@@ -80,8 +83,9 @@
                 <h6>★今日の一押し★</h6>
                 <div class="video">
                     <!-- <label>どこまでいってもにげてやる</label> -->
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UKESIh9fEfA" title="YouTube video player"
-                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UKESIh9fEfA"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>
                 </div>
