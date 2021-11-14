@@ -30,10 +30,10 @@ def main(kaigiPath, shitsmnUserID, kaitUserID, shitsmnID, seq, strDateTime, endD
         json_DBConnectInfo = C020_DBUtil.connectDB()
         # --(2)クエリとパラメータを定義
         # T100
-        sql_T100 = "INSERT INTO T130_KAIGI VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,\
+        sql_T100 = "INSERT INTO T130_KAIGI VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,\
             %s,%s,current_timestamp(6),%s,%s,current_timestamp(6),%s);"
         args_T100 = (newID_S120, kaigiPath, shitsmnUserID, kaitUserID, shitsmnID, seq, strDateTime,
-                     endDateTime, kaigiTime, SERVICE_ID, loginUserID, SERVICE_ID, loginUserID, "0")
+                     endDateTime, kaigiTime, SERVICE_ID, loginUserID, SERVICE_ID, loginUserID, "0",)
 
         # クエリを実行し、結果を取得
         # T100

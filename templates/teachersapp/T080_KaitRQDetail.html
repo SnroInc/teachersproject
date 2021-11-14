@@ -3,7 +3,11 @@
 {% block head %}
 <script>
     function kaitRQRecept() {
-        document.getElementById('form').action = 'teachersapp:matching';
+        document.getElementById('form').action = "{% url 'teachersapp:matching' %}";
+        document.getElementById('form').submit();
+    }
+    function kaitRQCancel() {
+        document.getElementById('form').action = "";
         document.getElementById('form').submit();
     }
     function back() {
@@ -44,6 +48,9 @@
                 <!-- いらないかも？ ------------------------------------------>
                 <!--仮エリア----------------------------------------------------------------->
                 <form id='form' name='form' method="post">{% csrf_token %}
+                    <input type="hidden" id="shitsmnID" name="shitsmnID" value="{{json_kaitRQInfo_S130.SHITSMN_ID}}">
+                    <input type="hidden" id="int_seq" name="int_seq" value="{{json_kaitRQInfo_S130.SEQ}}">
+                    <input type="hidden" id="int_rqSeq" name="int_rqSeq" value="{{json_kaitRQInfo_S130.RQSEQ}}">
                     <div class="row justify-content-start">
                         <div class="col-md-6">
                             <button type="button" onclick="kaitRQRecept();"
@@ -55,7 +62,7 @@
                     </div>
                     <div class="row justify-content-start">
                         <div class="col-md-6">
-                            <button type="button" onclick="kaitRQRecept();"
+                            <button type="button" onclick="kaitRQCancel();"
                                 class="btn btn-success btn-block">回答リクエスト取り消し</button>
                         </div>
                         <div class="col-md-6">

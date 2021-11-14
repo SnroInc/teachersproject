@@ -97,7 +97,7 @@ def main(request):
             """
             # 戻り値にセット
             flg_return = "0"
-            ttemplate = C010_Const.APP_NAME_DEFAULT + '/T030_ShitsmnSaksi.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T030_ShitsmnSaksi.html'
             json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context, **{
                 "json_keibaInfo": json_keibaInfo,
