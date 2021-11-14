@@ -20,7 +20,7 @@ from . import (C010_Const, C030_MessageUtil,
                )
 
 
-def main(request,shitsmnID):
+def main(request, shitsmnID):
     # --View共通----------------------------------------------
     # 戻り値用の変数宣言
     flg_return = ""
@@ -40,7 +40,7 @@ def main(request,shitsmnID):
             errflg = "0"
             # -------------------------------------------------------------------------------
             flg_return = "1"
-            path_name = 'teachersapp:topPage'
+            path_name = C010_Const.APP_NAME_DEFAULT + ':topPage'
         else:
             # POST以外の場合
             """
@@ -62,21 +62,21 @@ def main(request,shitsmnID):
             C030_MessageUtil.setMessageList(request,list_msgInfo_S060)
             #-------------------------------------------------------------------------------
             """
-            #サービス呼び出し
+            # サービス呼び出し
             json_S050 = S050_ShitsmnInfoShutk.main(shitsmnID)
-            #個々の値を取得
+            # 個々の値を取得
             flg_S050 = json_S050["json_CommonInfo"]["errflg"]
             list_msgInfo_S050 = json_S050["json_CommonInfo"]["list_msgInfo"]
             json_shitsmnDetail = json_S050["json_shitsmnInfo"]
-            #メッセージ格納
-            C030_MessageUtil.setMessageList(request,list_msgInfo_S050)
+            # メッセージ格納
+            C030_MessageUtil.setMessageList(request, list_msgInfo_S050)
 
             # 戻り値にセット
             flg_return = "0"
-            template = 'teachersapp/T050_ShitsmnDetail.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T050_ShitsmnDetail.html'
             json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context, **{
-                "json_shitsmnDetail":json_shitsmnDetail,
+                "json_shitsmnDetail": json_shitsmnDetail,
                 "json_keibaInfo": json_keibaInfo,
             }
             }

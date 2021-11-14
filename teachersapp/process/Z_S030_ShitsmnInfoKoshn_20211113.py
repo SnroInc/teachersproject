@@ -12,7 +12,7 @@ from . import C010_Const, C020_DBUtil, C030_MessageUtil, C050_StringUtil
 SERVICE_ID = "S030"
 
 
-def main(shitsmnID, shitsmnTitle, shitsmnNaiyo, shitsmnUserID, kaigiID, list_hashTag, strDate01, endDate01, kaigiTime01, strDate02, endDate02, kaigiTime02, strDate03, endDate03, kaigiTime03, updUserID):
+def main(shitsmnID, shitsmnTitle, shitsmnNaiyo, shitsmnUserID, kaigiID, list_hashTag, list_kaigikibujikn, updUserID):
     # --戻り値用の変数宣言------------------------------------------------------------------------------
     errflg = "0"
     list_msgInfo = []
