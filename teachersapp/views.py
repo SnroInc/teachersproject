@@ -16,7 +16,9 @@ from .process import (
     V110_Profile,
     V115_MyPage,
     V120_UserKoshn,
-    V140_Matching
+    V140_Matching,
+    V151_StartKaigi,
+    V913_SuccessMatching,
 )
 from .process import C010_Const, C030_MessageUtil
 from .process import S006_GetKeibaNews
@@ -321,6 +323,67 @@ def v140_Matching(request):
             template = json_view["template"]
             return render(request, template, context)
         elif flg_return == "1":
+            # 「redirect」の場合(★★★★★パラメータ受け渡し処理あり★★★★★)
+            path_name = json_view["path_name"]
+            path_param = json_view["path_param"]
+            shitsmnID = path_param[0]
+            kaigiID = path_param[1]
+            return redirect(path_name, shitsmnID, kaigiID)
+    except Exception as e:
+        # システムエラー共通処理
+        C030_MessageUtil.systemErrorCommonMethod()
+        # システムエラー画面に遷移
+        return redirect(PATH_ERR)
+
+
+# 会議スタート！
+def v151_StartKaigiView(request, shitsmnID):
+    try:
+        # ビュープロセスクラスを呼び出し
+        json_view = V151_StartKaigi.main(request, shitsmnID)
+        # 「render」か「redirect」かを判断
+        flg_return = json_view["flg_return"]
+        if flg_return == "0":
+            # 「render」の場合
+            context = json_view["context"]
+            template = json_view["template"]
+            return render(request, template, context)
+        elif flg_return == "1":
+            # 「redirect」の場合(★★★★★パラメータ受け渡し処理あり★★★★★)
+            path_name = json_view["path_name"]
+            path_param = json_view["path_param"]
+            return redirect(path_name)
+    except Exception as e:
+        # システムエラー共通処理
+        C030_MessageUtil.systemErrorCommonMethod()
+        # システムエラー画面に遷移
+        return redirect(PATH_ERR)
+
+
+def v910_SuccessView(request):
+    template = 'teachersapp/T910_Success.html'
+    context = {}
+    try:
+        return render(request, template, context)
+    except Exception as e:
+        # システムエラー共通処理
+        C030_MessageUtil.systemErrorCommonMethod()
+        # システムエラー画面に遷移
+        return redirect(PATH_ERR)
+
+
+def v913_SuccessMatchingView(request, shitsmnID, kaigiID):
+    try:
+        # ビュープロセスクラスを呼び出し
+        json_view = V913_SuccessMatching.main(request, shitsmnID, kaigiID)
+        # 「render」か「redirect」かを判断
+        flg_return = json_view["flg_return"]
+        if flg_return == "0":
+            # 「render」の場合
+            context = json_view["context"]
+            template = json_view["template"]
+            return render(request, template, context)
+        elif flg_return == "1":
             # 「redirect」の場合
             path_name = json_view["path_name"]
             return redirect(path_name)
@@ -340,18 +403,6 @@ def v999_SystemError(request):
         # コンソールにエラーを出力
         C030_MessageUtil.systemErrorCommonMethod()
         return render(request, template, context)
-
-
-def v910_SuccessView(request):
-    template = 'teachersapp/T910_Success.html'
-    context = {}
-    try:
-        return render(request, template, context)
-    except Exception as e:
-        # システムエラー共通処理
-        C030_MessageUtil.systemErrorCommonMethod()
-        # システムエラー画面に遷移
-        return redirect(PATH_ERR)
 
 
 # ===テストorサンプルメソッド========================================================================

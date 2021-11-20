@@ -4,6 +4,11 @@
 {% block head %}
 {% load static %}
 <link rel="stylesheet" href="{% static '/css/teachersproject.css' %}">
+
+<!-- 子画面用 -->
+{% block head_success %}
+{% endblock head_success %}
+
 {% endblock head %}
 <!-- </header> -->
 <!-- <body> -->
@@ -27,6 +32,11 @@
 </div>
 {% endif %} -->
 <!-- メッセージ表示エリア-------------------------------------------------- -->
+
+<!-- 子画面用 -->
+{% block content_success %}
+{% endblock content_success %}
+
 <div class="container">
     <a href="{% url 'teachersapp:topPage' %}">
         <h4>Topページへ</h4>

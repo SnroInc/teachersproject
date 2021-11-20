@@ -120,12 +120,13 @@ def main(request):
             # 個々の値を取得
             #flg_S240 = json_S240["json_CommonInfo"]["errflg"]
             list_msgInfo_S240 = json_S240["json_CommonInfo"]["list_msgInfo"]
-            #str_kaigiID_S240 = json_S240["str_kaigiID"]
+            str_kaigiID_S240 = json_S240["str_kaigiID"]
             # メッセージ格納
             C030_MessageUtil.setMessageList(request, list_msgInfo_S240)
             # -------------------------------------------------------------------------------
             flg_return = "1"
-            path_name = C010_Const.PATH_NAME_SUCCESS
+            path_name = C010_Const.APP_NAME_DEFAULT + ':successMatching'
+            path_param = (shitsmnID, str_kaigiID_S240)
         else:
             # POST以外の場合
             """
@@ -149,7 +150,7 @@ def main(request):
             """
             # 戻り値にセット
             flg_return = "0"
-            template = C010_Const.APP_NAME_DEFAULT + '/T100_SignUp.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T020_Login.html'
             #list_newsInfo = S006_GetKeibaNews.main(10)
             context = {**context, **{
                 # "list_newsInfo":list_newsInfo,
@@ -158,7 +159,7 @@ def main(request):
 
         # 戻り値用のjsonを作成
         json_view = {'flg_return': flg_return, 'template': template,
-                     'context': context, 'path_name': path_name}
+                     'context': context, 'path_name': path_name, 'path_param': path_param}
         return json_view
     # ==例外処理==========================================================================================
     except Exception as e:

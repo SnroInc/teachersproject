@@ -1,0 +1,46 @@
+{% extends "teachersapp/T910_Success.html" %}
+<!-- <html-->
+<!-- <header> -->
+{% block head_success %}
+<script>
+    function updateKaigiPath() {
+        document.getElementById('form').action = "{% url 'teachersapp:successMatching' shitsmnID kaigiID %}";
+        document.getElementById('form').submit();
+    }
+</script>
+{% endblock head_success %}
+<!-- </header> -->
+
+<!-- <body> -->
+
+{% block content_success %}
+<!-- 説明 -->
+<h6>会議を開始するまでの流れ</h6>
+<hr>
+会議をするまでの流れは下記の通りです。<br>
+　①会議開始時間まで待ちます<br>
+　②会議開始時間になったら、質問ページから「会議に参加する」をクリックします。<br>
+　③会議開始の画面で「会議を開始する」ボタンをクリックします。<br>
+　④別ウインドで会議が開きます。<br>
+<br>
+<br>
+<!-- パス指定エリア -->
+<h6>会議パスを登録（任意）</h6>
+<hr>
+<form id='form' name='form' method="post">{% csrf_token %}
+    <div class="form-group">
+        <br>
+        <div class="col-md-6">
+            <input type="text" id="kaigiPath" name="kaigiPath" class="form-control"
+                placeholder="会議パスをご自身で指定したい場合は入力してください（任意）">
+            <br>
+            <button type="button" onclick="updateKaigiPath();" class="btn btn-success btn-block">会議パスを登録</button>
+        </div>
+    </div>
+</form>
+<br>
+<br>
+{% endblock content_success %}
+
+<!-- </body>>-->
+<!-- </html>-->
