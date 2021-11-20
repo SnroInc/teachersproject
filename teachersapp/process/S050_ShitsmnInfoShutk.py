@@ -25,7 +25,7 @@ def main(shitsmnID):
         # クエリを定義
         sql = "select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,\
             KAISHNCHJ01,SHURYNCHJ01,KAIGIJIKN01,KAISHNCHJ02,SHURYNCHJ02,KAIGIJIKN02,KAISHNCHJ03,SHURYNCHJ03,KAIGIJIKN03,\
-                KAIGIID,CRTDATE,UPDDATE from t100_shitsmn where SHITSMN_ID = %s  and DELFLG = '0' ;"
+                KAIGIID,CRTDATE,UPDDATE from T100_SHITSMN where SHITSMN_ID = %s  and DELFLG = '0' ;"
         # パラメータを定義
         args = (shitsmnID,)
         # クエリを実行し、結果を取得

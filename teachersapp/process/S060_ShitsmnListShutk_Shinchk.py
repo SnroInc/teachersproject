@@ -34,7 +34,7 @@ def main():
         # クエリを定義
         sql = "select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,\
             KAISHNCHJ01,SHURYNCHJ01,KAIGIJIKN01,KAISHNCHJ02,SHURYNCHJ02,KAIGIJIKN02,KAISHNCHJ03,SHURYNCHJ03,KAIGIJIKN03,\
-            KAIGIID,CRTDATE,UPDDATE from t100_shitsmn where DELFLG = '0' order by crtdate desc limit %s ;"
+            KAIGIID,CRTDATE,UPDDATE from T100_SHITSMN where DELFLG = '0' order by crtdate desc limit %s ;"
         # パラメータを定義
         args = (kensu,)
         # クエリを実行し、結果を取得
