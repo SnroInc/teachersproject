@@ -48,6 +48,7 @@
                 <!-- いらないかも？ ------------------------------------------>
                 <!--仮エリア----------------------------------------------------------------->
                 <form id='form' name='form' method="post">{% csrf_token %}
+                    <!--これらhiddenは不正アクセスされる可能性あり。V系クラスでのチェック要。---->
                     <input type="hidden" id="shitsmnID" name="shitsmnID" value="{{json_kaitRQInfo_S130.SHITSMN_ID}}">
                     <input type="hidden" id="int_seq" name="int_seq" value="{{json_kaitRQInfo_S130.SEQ}}">
                     <input type="hidden" id="int_rqSeq" name="int_rqSeq" value="{{json_kaitRQInfo_S130.RQSEQ}}">

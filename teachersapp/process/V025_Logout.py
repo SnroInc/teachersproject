@@ -46,7 +46,7 @@ def main(request):
             request.session.clear()
             # 戻り値にセット
             flg_return = "1"
-            path_name = C010_Const.APP_NAME_DEFAULT + ':ogin'
+            path_name = C010_Const.APP_NAME_DEFAULT + ':login'
 
         # 戻り値用のjsonを作成
         json_view = {'flg_return': flg_return, 'template': template,

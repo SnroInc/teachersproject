@@ -1,7 +1,7 @@
 """
 ビュークラス
-V050_ShitsmnDetailProcess
-質問詳細View
+V030_ShitsmnSaksiProcess
+質問作成ページ用View
 エラーフラグ：0(正常終了),1(業務エラー),2(システムエラー)
 flg_return：0(render),1(redirect)
 
@@ -12,11 +12,9 @@ flg_return==1の時、「path_name」必須
 
 import datetime
 from django.urls import reverse
-from . import S999_SampleService
-from . import (C010_Const, C030_MessageUtil,
+from . import (C010_Const, C030_MessageUtil, C050_StringUtil,
+               S271_SelectKaigi_ByShitsmnID,
                S006_GetKeibaNews,
-               S020_ShitsmnInfoTork,
-               S050_ShitsmnInfoShutk
                )
 
 
@@ -27,6 +25,7 @@ def main(request, shitsmnID):
     template = ''
     context = {}
     path_name = ''
+    path_param = ()
     # -------------------------------------------------------
     try:
         if request.method == 'POST':
@@ -38,7 +37,6 @@ def main(request, shitsmnID):
             例は、redirect
             """
             errflg = "0"
-            # -------------------------------------------------------------------------------
             flg_return = "1"
             path_name = C010_Const.APP_NAME_DEFAULT + ':topPage'
         else:
@@ -62,30 +60,31 @@ def main(request, shitsmnID):
             C030_MessageUtil.setMessageList(request,list_msgInfo_S060)
             #-------------------------------------------------------------------------------
             """
-            # --S050-------------------------------------------------------------------------
+            loginUserID = request.session['userID']
+            # --S271-------------------------------------------------------------------------
             # サービス呼び出し
-            json_S050 = S050_ShitsmnInfoShutk.main(shitsmnID)
+            json_S271 = S271_SelectKaigi_ByShitsmnID.main(
+                shitsmnID, loginUserID)
             # 個々の値を取得
-            flg_S050 = json_S050["json_CommonInfo"]["errflg"]
-            list_msgInfo_S050 = json_S050["json_CommonInfo"]["list_msgInfo"]
-            json_shitsmnDetail = json_S050["json_shitsmnInfo"]
+            flg_S271 = json_S271["json_CommonInfo"]["errflg"]
+            list_msgInfo_S271 = json_S271["json_CommonInfo"]["list_msgInfo"]
+            json_kaigiInfo_S271 = json_S271["json_kaigiInfo"]
             # メッセージ格納
-            C030_MessageUtil.setMessageList(request, list_msgInfo_S050)
-            # --S050-------------------------------------------------------------------------
+            C030_MessageUtil.setMessageList(request, list_msgInfo_S271)
+            # -------------------------------------------------------------------------------
 
-            # 戻り値にセット
             flg_return = "0"
-            template = C010_Const.APP_NAME_DEFAULT + '/T050_ShitsmnDetail.html'
+            template = C010_Const.APP_NAME_DEFAULT + '/T120_StartKaigi.html'
             json_keibaInfo = S006_GetKeibaNews.main(10)
             context = {**context, **{
-                "json_shitsmnDetail": json_shitsmnDetail,
+                "json_kaigiInfo_S271": json_kaigiInfo_S271,
                 "json_keibaInfo": json_keibaInfo,
             }
             }
 
         # 戻り値用のjsonを作成
         json_view = {'flg_return': flg_return, 'template': template,
-                     'context': context, 'path_name': path_name}
+                     'context': context, 'path_name': path_name, 'path_param': path_param}
         return json_view
     # ==例外処理==========================================================================================
     except Exception as e:

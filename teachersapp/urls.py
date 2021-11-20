@@ -26,6 +26,10 @@ urlpatterns = [
     path('userKoshn/', views.v120_UserKoshn, name='userKoshn'),
     path('matching/', views.v140_Matching, name='matching'),
     path('success/', views.v910_SuccessView, name='success'),
+    path('shitsmnDetail/<str:shitsmnID>/<str:kaigiID>/successMatching/',
+         views.v913_SuccessMatchingView, name='successMatching'),
+    path('startKaigi/<str:shitsmnID>/',
+         views.v151_StartKaigiView, name='startKaigi'),
     path('systemError/', views.v999_SystemError, name='systemError'),
     # Sample
     path('Sample/', views.v999_sampleMethod, name='sample_path1'),

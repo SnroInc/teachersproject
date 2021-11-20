@@ -1,0 +1,52 @@
+{% extends "teachersapp/T000_Base.html" %}
+<!-- <html-->
+
+<!-- <body> -->
+{% block content %}
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-8">
+            <h6>会議を開始</h6>
+            <hr>
+            <br>
+            <label>ボタンクリックで会議を開きます</label>
+            <br>
+            <br>
+            <a href="{{json_kaigiInfo_S271.KAIGI_PATH}}" class="btn btn-success btn-block" target="_blank">会議を開始する</a>
+        </div>
+        <div class="col-md-3">
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <h6>★今日の一押し★</h6>
+                <a href="{{json_keibaInfo.json_newsVideoKametanInfo.newsVideo_kametani_url}}" target="_blank">
+                    <img class="tp_thumbnailImg"
+                        src="{{json_keibaInfo.json_newsVideoKametanInfo.newsVideo_kametani_imgSrc}}">
+                </a>
+            </div>
+            <!-- 一押し動画エリア ------------------------------------------------------------------------------->
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
+            <div class="p-3 mb-2 bg-light text-dark">
+                <div class="">
+                    <h5 class="tp_bg_newsAreaTitle">★新着ニュース</h5>
+                    {% for json_newsInfo in json_keibaInfo.list_news_Info_gokum %}
+
+                    <a class="text-decoration-none text-dark" href="{{json_newsInfo.newsURL}}" target="_blank">
+                        <div class="tp_bg_newsArea">
+                            <p>{{json_newsInfo.newsTitle}}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- ニュースエリア ------------------------------------------------------------------------------->
+        </div>
+    </div>
+    <br>
+    <br>
+
+    {% endblock content %}

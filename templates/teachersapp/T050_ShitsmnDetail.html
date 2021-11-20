@@ -45,7 +45,7 @@
                             <span class="mgr-50">{{ json_shitsmnDetail.KAISHNCHJ02 }}</span>
                             <span class="mgr-50">から</span>
                             {{ json_shitsmnDetail.KAIGIJIKN02 }}分
-                          
+
                         <p class="kaigiTime">
                             <span class="mgr-50">第三希望</span>
                             <span class="mgr-50">{{ json_shitsmnDetail.KAISHNCHJ03 }}</span>
@@ -64,7 +64,8 @@
                 {% endif %}
                 {% comment %} 質問者とマッチングしたユーザのみ会議を開始ボタンを表示。追加ロジック必要。 {% endcomment %}
                 {% if request.session.userID == json_shitsmnDetail.SHITSMN_USERID %}
-                <a href="{% url 'teachersapp:topPage' %}" class="btn btn-success btn-block">会議を開始</a>
+                <a href="{% url 'teachersapp:startKaigi' json_shitsmnDetail.SHITSMN_ID %}"
+                    class="btn btn-success btn-block">会議を開始</a>
                 {% endif %}
                 {% comment %} 質問者のみに回答リクエスト一覧ボタンを表示 {% endcomment %}
                 {% if request.session.userID == json_shitsmnDetail.SHITSMN_USERID %}
