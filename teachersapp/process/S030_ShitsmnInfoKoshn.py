@@ -25,7 +25,7 @@ def main(shitsmnID, shitsmnTitle, shitsmnNaiyo, shitsmnUserID, kaigiID, list_has
         # --(2)クエリとパラメータを定義
         # T100
         list_args_T100 = []
-        sql_T100 = "update t100_shitsmn \
+        sql_T100 = "update T100_SHITSMN \
                     set "
         if not C050_StringUtil.isNull(shitsmnTitle):
             sql_T100 = sql_T100 + "SHITSMN_TITLE = %s, "

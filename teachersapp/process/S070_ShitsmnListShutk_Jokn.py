@@ -37,7 +37,7 @@ def main(keyWord, list_hashTag, date_From, date_To, selfQ_userID, selfRQ_userID)
         sql = "select SHITSMN_ID,SHITSMN_TITLE,SHITSMN_NAIYO,SHITSMN_USERID,\
             KAISHNCHJ01,SHURYNCHJ01,KAIGIJIKN01,KAISHNCHJ02,SHURYNCHJ02,KAIGIJIKN02,KAISHNCHJ03,SHURYNCHJ03,KAIGIJIKN03,\
             KAIGIID,CRTDATE,UPDDATE \
-                from t100_shitsmn t100_main \
+                from T100_SHITSMN t100_main \
                 where  exists \
                     (select 1 \
                         from (   \
