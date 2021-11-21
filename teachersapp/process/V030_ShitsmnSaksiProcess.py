@@ -13,7 +13,7 @@ flg_return==1の時、「path_name」必須
 import datetime
 from django.urls import reverse
 from . import S999_SampleService
-from . import (C010_Const, C030_MessageUtil,
+from . import (C010_Const, C030_MessageUtil, C050_StringUtil, C070_IntegerUtil, C080_DateUtil,
                S006_GetKeibaNews,
                S020_ShitsmnInfoTork
                )
@@ -26,6 +26,7 @@ def main(request):
     template = ''
     context = {}
     path_name = ''
+    path_param = ()
     # -------------------------------------------------------
     try:
         if request.method == 'POST':
@@ -42,27 +43,81 @@ def main(request):
             shitsmnNaiyo = request.POST['shitsmnNaiyo']
             hashTags = request.POST['hashTags']
             list_hashTag = hashTags.replace(" ", "").split("#")
-            # --S020-------------------------------------------------------------------------
-            # サービス呼び出し
             #shitsmnTitle = "菊花賞の勝ち馬を教えてください"
             #shitsmnNaiyo = "3000mの3歳馬なので分かりません。"
             shitsmnUserID = request.session['userID']
             #list_hashTag = ["菊花賞","福永祐一"]
             # 会議終了時間計算
-            eTime1 = datetime.datetime.strptime(
-                request.POST['sTime1'], '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=int(request.POST['duration1']))
-            eTime2 = datetime.datetime.strptime(
-                request.POST['sTime2'], '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=int(request.POST['duration2']))
-            eTime3 = datetime.datetime.strptime(
-                request.POST['sTime3'], '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=int(request.POST['duration3']))
-            strDate01 = request.POST['sTime1']
-            kaigiTime01 = request.POST['duration1']
-            strDate02 = request.POST['sTime2']
-            kaigiTime02 = request.POST['duration2']
-            strDate03 = request.POST['sTime3']
-            kaigiTime03 = request.POST['duration3']
+
+            sTime1 = request.POST['sTime1']
+            # 多分直書きしているからstr型だけど、dbから取得するようにすればint型になる
+            minutes1 = int(request.POST['duration1'])
+            sTime2 = request.POST['sTime2']
+            minutes2 = int(request.POST['duration2'])
+            sTime3 = request.POST['sTime3']
+            minutes3 = int(request.POST['duration3'])
+            eTime1 = None
+            eTime2 = None
+            eTime3 = None
+            if(not C050_StringUtil.isEmpty(sTime1)) and (not C070_IntegerUtil.isNull(minutes1)):
+                eTime1 = datetime.datetime.strptime(
+                    sTime1, '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=minutes1)
+            else:
+                sTime1 = None
+            if(not C050_StringUtil.isEmpty(sTime2)) and (not C070_IntegerUtil.isNull(minutes2)):
+                eTime2 = datetime.datetime.strptime(
+                    sTime2, '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=minutes2)
+            else:
+                sTime2 = None
+            if(not C050_StringUtil.isEmpty(sTime3)) and (not C070_IntegerUtil.isNull(minutes3)):
+                eTime3 = datetime.datetime.strptime(
+                    sTime3, '%Y-%m-%dT%H:%M') + datetime.timedelta(minutes=minutes3)
+            else:
+                sTime3 = None
+
+            # ==チェック処理======================================================================
+            # 質問タイトルチェック
+            if C050_StringUtil.isAllSpace(shitsmnTitle):
+                # ここに業務エラー処理を書く
+                errflg = "1"
+                # 「第一希望の必須チェック」
+                C030_MessageUtil.setMessage(
+                    request, "E0001", ("質問タイトル",))
+            # 会議希望時間（第一希望）チェック
+            if C050_StringUtil.isEmpty(sTime1) or C070_IntegerUtil.isNull(minutes1):
+                # ここに業務エラー処理を書く
+                errflg = "1"
+                # 「第一希望の必須チェック」
+                C030_MessageUtil.setMessage(
+                    request, "E0001", ("会議時間 第一希望",))
+
+            # -------------------------------------------------------------------------------
+            # チェックNGの場合、処理を終了して再描画
+            if errflg == "1":
+                flg_return = "0"
+                template = C010_Const.APP_NAME_DEFAULT + '/T030_ShitsmnSaksi.html'
+                context = {**context, **{
+                    "shitsmnTitle": shitsmnTitle,
+                    "hashTags": hashTags,
+                    "shitsmnNaiyo": shitsmnNaiyo,
+                    "sTime1": sTime1,
+                    "sTime2": sTime2,
+                    "sTime3": sTime3,
+                    "duration1": minutes1,
+                    "duration2": minutes2,
+                    "duration3": minutes3,
+                }
+                }
+                # 戻り値用のjsonを作成
+                json_view = {'flg_return': flg_return, 'template': template,
+                             'context': context, 'path_name': path_name, 'path_param': path_param}
+                return json_view
+            # ==チェック処理======================================================================
+
+            # --S020-------------------------------------------------------------------------
+            # サービス呼び出し
             json_S020 = S020_ShitsmnInfoTork.main(
-                shitsmnTitle, shitsmnNaiyo, shitsmnUserID, list_hashTag, strDate01, eTime1, kaigiTime01, strDate02, eTime2, kaigiTime02, strDate03, eTime3, kaigiTime03, None)
+                shitsmnTitle, shitsmnNaiyo, shitsmnUserID, list_hashTag, sTime1, eTime1, minutes1, sTime2, eTime2, minutes2, sTime3, eTime3, minutes3, None)
             # 個々の値を取得
             flg_S020 = json_S020["json_CommonInfo"]["errflg"]
             list_msgInfo_S020 = json_S020["json_CommonInfo"]["list_msgInfo"]
